@@ -109,10 +109,10 @@
     <gap:plugin name="org.apache.cordova.network-information" source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
     <gap:plugin name="org.apache.cordova.vibration" source="npm" />
-    <gap:plugin name="org.apache.cordova.device" source="pgb" version="0.3.0" />
-    <gap:plugin name="org.apache.cordova.network-information" source="pgb" version="0.2.15" />
+    <gap:plugin name="org.apache.cordova.device" source="npm" version="0.3.0" />
+    <gap:plugin name="org.apache.cordova.network-information" source="npm" version="0.2.15" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
-    <gap:plugin name="cordova-plugin-camera" source="pgb" version="1.2.0" />
+    <gap:plugin name="cordova-plugin-camera" source="npm" version="1.2.0" />
     
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="Orientation" value="portrait" />
