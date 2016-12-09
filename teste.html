@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+    <script src="js/jquery-2.1.0.min.js"></script>
+<script>
+function GetQueryString(a)
+{
+    a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+
+    if (typeof a === "string")
+        a = a.split("#").join("&").split("&");
+
+    // se não há valores, retorna um objeto vazio
+    if (!a) return {};
+
+    var b = {};
+    for (var i = 0; i < a.length; ++i)
+    {
+        // obtem array com chave/valor
+        var p = a[i].split('=');
+
+        // se não houver valor, ignora o parametro
+        if (p.length != 2) continue;
+
+        // adiciona a propriedade chave ao objeto de retorno
+        // com o valor decodificado, substituindo `+` por ` `
+        // para aceitar URLs codificadas com `+` ao invés de `%20`
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    // retorna o objeto criado
+    return b;
+}
+
+// uso
+var qs = GetQueryString();
+
+$(document).ready(function(){
+	
+	var arquivo = 'json/biblia/' + qs['livro'] + '.json';
+	var voltar;
+	
+	//tipo = 1 - Texto do ano biblico na Bíblia
+	if(qs['tipo'] == 1)
+	{
+		voltar = '<a href="biblia_livro.html?';
+		voltar += 'livro=' + qs['livro'];
+		voltar += '&titulo=' + qs['titulo'];
+		voltar += '&total=' + qs['total'];
+		voltar += '" class=""><i class=""></i>Voltar</a>';
+        voltar += '<a href="biblia_completa.html" class=""><i class=""></i>Livros</a>';
+		
+		
+		//Navegação entre capitulos
+		document.getElementById("navegacao").innerHTML = '';
+		if(parseInt(qs['capitulo']) > 1)
+		{
+			var retroceder;
+			var anterior;
+			
+			retroceder = parseInt(qs['capitulo']) - 1;
+			
+			anterior = '<a href="biblia_capitulo.html?'; 
+			anterior += 'livro=' + qs['livro'];
+			anterior += '&titulo=' + qs['titulo'];
+			anterior += '&capitulo=' + retroceder;
+			anterior += '&total=' + qs['total'];
+			anterior += '&tipo=1" class=""><<- Anterior</a>';
+			document.getElementById("navegacao").innerHTML += anterior;
+		}
+		if(parseInt(qs['capitulo']) < parseInt(qs['total']))
+		{
+			var avancar;
+			var proximo;
+			
+			proximo = parseInt(qs['capitulo']) + 1;
+			avancar = '<a href="biblia_capitulo.html?'; 
+			avancar += 'livro=' + qs['livro'];
+			avancar += '&titulo=' + qs['titulo'];
+			avancar += '&capitulo=' + proximo;
+			avancar += '&total=' + qs['total'];
+			avancar += '&tipo=1" class="">Próximo ->></a>';
+			
+			document.getElementById("navegacao").innerHTML += avancar;
+		}
+		//Fim da navegação entre capitulos
+	}
+	//tipo = 2 - Texto do ano biblico diario
+	else if(qs['tipo'] == 2)
+	{
+		voltar = '<a href="ano_biblico_diario_dia.html?';
+		voltar += 'dia=' + qs['dia'];
+		voltar += '&mes=' + qs['mes'];
+		voltar += '&nome_mes=' + qs['nome_mes'];
+		voltar += '" class=""><i class=""></i>Voltar</a>';
+	}
+	//tipo = 3 - Texto do ano biblico senanal por temas
+	else if(qs['tipo'] == 3)
+	{
+		voltar = '<a href="ano_biblico_temas_dia.html?';
+		voltar += 'dia=' + qs['dia'];
+		voltar += '&mes=' + qs['mes'];
+		voltar += '&nome_mes=' + qs['nome_mes'];
+		voltar += '" class=""><i class=""></i>Voltar</a>';
+	}
+	
+	voltar += '<a href="index.html" class=""><i class="fa fa-home"></i>Início</a>';
+	
+	document.getElementById("titulo").innerHTML = qs['titulo'] + ' - Capítulo ' + qs['capitulo'];
+	document.getElementById("voltar").innerHTML = voltar;
+	document.getElementById("voltar2").innerHTML = voltar;
+	
+	
+// Classe para chamar o Json.
+function json(){
+	var qtd;
+	var retorno;
+	var capitulos;
+	
+	livros = qs['livro'];
+	capitulos = qs['capitulo'];
+
+	// Resgatar valores.
+	json.prototype.resgatarValores = function(){
+		$('#texto').html('Carregando dados...');
+
+		// Estrutura de resultado.
+		$.getJSON(arquivo, function(data){
+			this.qtd = data.Livro.length;
+			this.retorno = '';
+
+			for (i = 0; i < this.qtd; i++)
+			{
+					if(data.Livro[i].capitulo == capitulos)
+					{
+						this.retorno += '<strong>';
+						this.retorno += data.Livro[i].verso;
+						this.retorno += '</strong>';
+						this.retorno += ' - ';
+						this.retorno += data.Livro[i].texto;
+						this.retorno += '<br>';
+					}
+			}
+
+			$('#texto').html(this.retorno);
+		});
+	}
+}
+
+// Objeto.
+var obj = new json();
+obj.resgatarValores();
+
+});
+</script>
+    </head>
+
+<body>
+ <h4 class="heading-title" id="titulo"></h4>
+ <div id="voltar"></div><div id="navegacao"></div>
+ <p id="texto"></p>
+  <div id="voltar2"></div>
+</body>
+</html>
