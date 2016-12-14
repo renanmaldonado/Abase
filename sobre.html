@@ -30,6 +30,90 @@
     <script type="text/javascript">
         app.initialize();
     </script>
+    <script>
+	$(document).ready(function()
+	{
+		//Se esta rodando no App ou no Browser
+		window.isphone = false;
+		
+		if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
+		{
+			window.isphone = true;
+		}
+						  
+		if( window.isphone )
+		{
+			document.addEventListener("deviceready", onDeviceReady, false);
+		}
+		else
+		{
+			onDeviceReady();
+		}
+	});
+	
+	//Funcões e configurações
+	function onDeviceReady()
+	{
+		var info
+		var networkState = navigator.connection.type;
+		var states = {};
+		states[Connection.UNKNOWN]  = 'Desconhecida';
+		states[Connection.ETHERNET] = 'Ethernet';
+		states[Connection.WIFI]     = 'Wi-Fi';
+		states[Connection.CELL_2G]  = '2G';
+		states[Connection.CELL_3G]  = '3G';
+		states[Connection.CELL_4G]  = '4G';
+		states[Connection.CELL]     = 'Genérica';
+		states[Connection.NONE]     = 'Sem conexão';
+		
+		info = '<strong>Dados técnicos</strong>';
+		info += '<br>';
+		info += '<strong>Versão da plataforma de desenvolvimento</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += device.cordova;
+		info += '</span>';
+		info += '<br>';
+		info += '<strong>Modelo do Device</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += device.model;
+		info += '</span>';
+		info += '<br>';
+		info += '<strong>Sistema Operacional</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += device.platform;
+		info += '</span>';
+		info += '<br>';
+		info += '<strong>Versão do Sistema Operacional</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += device.version;
+		info += '</span>';
+		info += '<br>';
+		info += '<strong>Identificador Universal</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += device.uuid;
+		info += '</span>';
+		info += '<br>';
+		info += '<strong>Fabricante</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += device.manufacturer;
+		info += '</span>';
+		info += '<br>';
+		info += '<strong>Conexão atual</strong>';
+		info += '<br>';
+		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
+		info += states[networkState];
+		info += '</span>';
+		
+		document.getElementById("informacoes").innerHTML = info;
+	}
+	</script>
+
   <meta charset="utf-8">
 </head>
 
@@ -38,7 +122,19 @@
 
       <!-- Sidebar -->
       <ul id="slide-out" class="side-nav primary-color collapsible">
-
+		<li>
+          <div class="sidenav-header">
+            <!-- Avatar -->
+            <div class="nav-avatar">
+              <img class="circle avatar" src="img/iasd.png" alt="">
+              <div class="avatar-body">
+                <h3>ABASE</h3>
+                <p>União Leste Brasileira</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
         <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
@@ -47,6 +143,7 @@
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
 
@@ -77,25 +174,25 @@
         
         <div class="divider"></div>
         
-        <div class="container">
-            <div class="row">
-              <div class="col s12">
-                    <p align="center" style="width:90%">
-                    União Leste da Igreja Adventista do Sétimo Dia
-                    </p>
-                    
-                    <p align="center" style="width:90%">
-                    Este App foi desenvolvido pela RDORVAL SOLUÇÕES EM TECNOLOGIA e sua propriedade e direitos pertencem a União Leste da Igreja Adventista do Sétimo Dia.
-                    </p>
-                    <p align="center" style="width:90%">
-                    Copyright© 2016. Todos os direitos reservados. Todos os textos, imagens, gráficos, animações, vídeos, músicas, sons e outros materiais deste App são protegidos por direitos autorais e outros direitos de propriedade intelectual pertencentes à União Leste da Igreja Adventista do Sétimo Dia
-                    </p>
-
-                    
-              </div>
+        <div class="activities">
+            <div class="activity animated fadeinright delay-1">
+                <h4 class="title" align="center">União Leste da <br>Igreja Adventista do Sétimo Dia</h4>
+                <br>
+                <p align="justify"><span class="activity-time small grey-text" style="font-size:12px;">Este App foi desenvolvido pela RDORVAL SOLUÇÕES EM TECNOLOGIA e sua propriedade e direitos pertencem a União Leste da Igreja Adventista do Sétimo Dia.</span></p>
+                <br>
+                <p align="justify"><span class="activity-time small grey-text" style="font-size:12px;">Copyright© 2016. Todos os direitos reservados. Todos os textos, imagens, gráficos, animações, vídeos, músicas, sons e outros materiais deste App são protegidos por direitos autorais e outros direitos de propriedade intelectual pertencentes à União Leste da Igreja Adventista do Sétimo Dia.</span></p>
+               <p align="center" id="informacoes"></p>
             </div>
         </div>
+
+        <div class="divider"></div>
+
+        <center>
+        <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
+        </center>
         
+        <div class="divider"></div>
+
       </div> 
       <!-- End of Page Contents -->
 

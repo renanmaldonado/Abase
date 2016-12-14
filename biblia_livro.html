@@ -17,6 +17,7 @@
     <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/rdorval.css" rel="stylesheet" type="text/css">
+    
     <style type="text/css">
     body,td,th {
 	font-family: Raleway, Helvetica, Arial, sans-serif;
@@ -81,7 +82,7 @@
                             this.retorno += '&capitulo=' + [i];
                             this.retorno += '&total=' + tamanho;
                             this.retorno += '&tipo=1';
-                            this.retorno += '"class="btn-large primary-color" style="width:10%;margin:5px;height:48px;padding-left: 13px;">';
+                            this.retorno += '"class="waves-effect waves-light btn primary-color" style="width:40px;margin:10px;height:35px;padding-left:16px;">';
                             this.retorno += [i];
                             this.retorno += '</a>';
                             
@@ -97,7 +98,19 @@
 
       <!-- Sidebar -->
       <ul id="slide-out" class="side-nav primary-color collapsible">
-
+		<li>
+          <div class="sidenav-header">
+            <!-- Avatar -->
+            <div class="nav-avatar">
+              <img class="circle avatar" src="img/iasd.png" alt="">
+              <div class="avatar-body">
+                <h3>ABASE</h3>
+                <p>União Leste Brasileira</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
         <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
@@ -106,6 +119,7 @@
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
 
@@ -140,7 +154,7 @@
         <div class="container">
             <div class="row">
               <div class="col s12">
-    	          	<div id="resultado" align="center"></div>
+    				<div id="resultado" align="center"></div>
               </div>
             </div>
         </div>
@@ -151,6 +165,8 @@
             <a href="biblia.html" class="btn-large espaco"><i class="ion-arrow-left-a icone"></i>Voltar</a>
             <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
         </center>
+        
+        <div class="divider"></div>
 
         
 

@@ -29,28 +29,70 @@
         app.initialize();
     </script>
     <script>
-	 $(function () {
-         var urlRss = 'http://noticias.adventistas.org/pt/ulb/feed/';
-         $.ajax({
-             type: "GET",
-             url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent(urlRss),
-             dataType: 'json',
-             error: function (xhr) {
-                 var erro = xhr.responseText;
-                 alert('Erro ao ler o feed: ' + erro);
-             },
-             success: function (xml) {
-                 values = xml.responseData.feed.entries;
-                 for(var i = 0; i < values.length; i++) {
-                     var value = values[i];
-                     var li = $("<div />");
-                     li.html('<h4 class="news-title">' + value.title + '</h4><br />' + value.content);
-                     $("#resultado").append(li);
-                 }
-                 
-             }
-         });
-     });
+	function GetQueryString(a)
+	{
+		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+	
+		if (typeof a === "string")
+			a = a.split("#").join("&").split("&");
+	
+		// se não há valores, retorna um objeto vazio
+		if (!a) return {};
+	
+		var b = {};
+		for (var i = 0; i < a.length; ++i)
+		{
+			// obtem array com chave/valor
+			var p = a[i].split('=');
+	
+			// se não houver valor, ignora o parametro
+			if (p.length != 2) continue;
+	
+			// adiciona a propriedade chave ao objeto de retorno
+			// com o valor decodificado, substituindo `+` por ` `
+			// para aceitar URLs codificadas com `+` ao invés de `%20`
+			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+		}
+		// retorna o objeto criado
+		return b;
+	}
+	
+	// uso
+	var qs = GetQueryString();
+	
+	
+	$(document).ready(function(){
+		
+		var arquivo = 'https://www.portalulb.org.br/json/noticias.php';
+		
+		$('#resultado').html('Carregando dados...');
+					  
+		var retorno;
+		var qtde;
+	   
+            // Estrutura de resultado.
+            $.getJSON(arquivo, function(data){
+                this.qtd = data.Noticias.channel.item.length;
+                this.retorno = '';
+				
+			
+    
+                for (i = 0; i < this.qtd; i++)
+                {
+                    this.retorno +='<div class="news">';
+					this.retorno +='<div class="media-top-object animated fadeinright delay-2">';
+					this.retorno +='<div class="media-body">';
+					this.retorno +='<h4 class="news-title">';
+					this.retorno += '<a href="#">'+ data.Noticias.channel.item[i].title +'</a>';
+					this.retorno +='</h4>';
+            		this.retorno +='</div>';
+					this.retorno +='</div>';
+					this.retorno +='</div>';
+                }
+			
+                $('#resultado').html(this.retorno);
+            });
+	});
 	</script>
   <meta charset="utf-8">
 </head>
@@ -60,7 +102,19 @@
 
       <!-- Sidebar -->
       <ul id="slide-out" class="side-nav primary-color collapsible">
-
+		<li>
+          <div class="sidenav-header">
+            <!-- Avatar -->
+            <div class="nav-avatar">
+              <img class="circle avatar" src="img/iasd.png" alt="">
+              <div class="avatar-body">
+                <h3>ABASE</h3>
+                <p>União Leste Brasileira</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
         <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
@@ -69,6 +123,7 @@
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
 
@@ -92,19 +147,6 @@
             <p class="text-flow m-0">NOTICIAS</p>
         </div>
 
-
-        
-        <div class="news">
-
-          <div class="media-top-object animated fadeinright delay-2">
-            <img src="img/10.jpg" alt="" class="media-left">
-            <div class="media-body">
-              <h4 class="news-title">
-                <a href="event.html">Absorbed in the dark</a>
-              </h4>
-            </div>
-          </div>
-          </div>
 
          <div id="resultado"></div>
         

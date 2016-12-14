@@ -17,6 +17,7 @@
     <link href="css/swiper.css" rel="stylesheet" type="text/css">
     <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/rdorval.css" rel="stylesheet" type="text/css">
 
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -59,7 +60,7 @@
 	
 	$(document).ready(function(){
 		
-		var arquivo = 'http://localhost/intranet_iasd/json/agenda.php';
+		var arquivo = 'http://www.portalulb.org.br/json/agenda.php';
 		
 		$('#resultado').html('Carregando dados...');
 					  
@@ -70,16 +71,33 @@
             $.getJSON(arquivo, function(data){
                 this.qtd = data.Calendario.length;
                 this.retorno = '';
+				
     
                 for (i = 0; i < this.qtd; i++)
                 {
                     this.retorno +='<div class="activities">';
 					this.retorno +='<div class="activity animated fadeinright delay-1">';
 					this.retorno +='<p>'+ data.Calendario[i].nome +'</p>';
-					this.retorno +='<span class="activity-time small grey-text"><i class="ion-ios-clock-outline"></i> <span class="">'+ data.Calendario[i].inicio +' - '+ data.Calendario[i].fim +' | '+ data.Calendario[i].descricao +'</span></span>';
+					this.retorno +='<span class="activity-time small grey-text"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Calendario[i].inicio +''; 
+					
+					if(data.Calendario[i].fim == null || data.Calendario[i].fim=="0000-00-00")
+					{
+					this.retorno += 'vazio';
+					}
+					else
+					{
+					this.retorno += ' - '+ data.Calendario[i].fim +'';
+					}
+					
+					this.retorno += '</span></span>';
+					this.retorno += '<a href="evento.html?evento='+ data.Calendario[i].codigo +'&nome='+ data.Calendario[i].nome + '">'; 
+					this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
+					this.retorno += '</a>';
 					this.retorno +='</div>';
 					this.retorno +='</div>';
+
                 }
+			
                 $('#resultado').html(this.retorno);
             });
 	});
@@ -91,7 +109,19 @@
 
       <!-- Sidebar -->
       <ul id="slide-out" class="side-nav primary-color collapsible">
-
+		<li>
+          <div class="sidenav-header">
+            <!-- Avatar -->
+            <div class="nav-avatar">
+              <img class="circle avatar" src="img/iasd.png" alt="">
+              <div class="avatar-body">
+                <h3>ABASE</h3>
+                <p>União Leste Brasileira</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
         <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
@@ -100,6 +130,7 @@
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
 
@@ -119,13 +150,22 @@
 
         <div class="p-20 center">
             <i class="ion-android-calendar"></i>
-            <h4 class="m-0">
-            <p class="text-flow m-0">AGENDA</p>
+            <h4 class="m-0">AGENDA</h4>
+            <p class="text-flow m-0">Confira os próximos eventos</p>
         </div>
 
         
         <!-- Daily Activity-->
-          <div id="resultado"></div>
+        <div id="resultado"></div>
+        
+       	<div class="divider"></div>
+        
+        <div class="valign center-align w-100">
+            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
+        </div>
+
+       	<div class="divider"></div>
+
 
       </div> 
       <!-- End of Page Contents -->
