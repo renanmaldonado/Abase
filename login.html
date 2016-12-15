@@ -17,11 +17,6 @@
     <link href="css/swiper.css" rel="stylesheet" type="text/css">
     <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
-    body,td,th {
-	font-family: Raleway, Helvetica, Arial, sans-serif;
-}
-    </style>
 
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -29,8 +24,6 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-
-  <meta charset="utf-8">
 </head>
 
   <body>
@@ -75,50 +68,55 @@
       
       <!-- Page Contents -->
       <div class="page animated fadeinright">
-        
-        <div class="divider"></div>
 
-        <div id="filter">
-          <!-- Swipeboox Contents -->
-          <section id="image-filter">
-            <div class="wrap small-width">
-              <div data-pswp-uid="1" id="demo-gallery" class="demo-gallery">
-                <a href="agenda.html" class="mix ">
-                  <img src="img/1.jpg" alt="image">
-                </a>
-                <a href="noticias.html" class="mix ">
-                  <img src="img/2.jpg" alt="image">
-                </a>
-                <a href="projetos.html" class="mix">
-                  <img src="img/3.jpg" alt="image">
-                </a>
-                <a href="cursos.html" class="mix">
-                  <img src="img/4.jpg" alt="image">
-                </a>
-                <a href="midias.html" class="mix">
-                  <img src="img/5.jpg" alt="image">
-                </a>
-                <a href="biblia.html" class="mix">
-                  <img src="img/6.jpg" alt="image">
-                </a>
-                <a href="sobre.html" class="mix">
-                  <img src="img/7.jpg" alt="image">
-                </a>
-                <a href="#" class="mix">
-                  <img src="img/8.jpg" alt="image">
-                </a>
-              </div>
+        <!-- Form Inputs --> 
+        <div class="form-inputs p-20">
+
+          <h4 class="center">Fill the form!</h4>
+          <div>
+            <div class="input-field animated fadeinright">
+              <i class="ion-ios-person-outline prefix"></i>
+              <input id="first_name" type="text" class="validate">
+              <label for="first_name">Name</label>
             </div>
-          </section> <!-- End of Swipebox Contents -->
+          </div>
+          <div class="input-field animated fadeinright delay-2">
+            <i class="ion-ios-email-outline prefix"></i>
+            <input id="email" type="email">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-field animated fadeinright delay-3">
+            <i class="ion-ios-telephone-outline prefix"></i>
+            <input id="telephone" type="text" class="validate">
+            <label for="telephone">Telephone</label>
+          </div>
+          <div class="input-field animated fadeinright delay-4">
+            <i class="ion-ios-location-outline prefix"></i>
+            <input id="city" type="text" class="validate">
+            <label for="city">City</label>
+          </div>
+          
+          <div class="input-field animated fadeinright delay-5">
+            <i class="ion-ios-compose-outline prefix"></i>
+            <textarea class="materialize-textarea" id="textarea1"></textarea> 
+            <label for="textarea1">Write your message here</label>
+          </div>
+
+          <p class="remember animated bouncein delay-6">
+            <input type="checkbox" id="test5" />
+            <label for="test5">This is an awesome checkbox</label>
+          </p>
+      
+          <a class="waves-effect waves-light btn-large primary-color block animated bouncein delay-6" href="index.html">Send</a>
         </div>
+        <!-- End of Form -->
 
-        <div class="clr"></div>
-        <div class="p-20"></div>
-
+        
       </div> 
       <!-- End of Page Contents -->
 
     </div><!-- End of Main Container -->
+    
     
     <script src="js/jquery.swipebox.min.js"></script>   
     <script src="js/jquery.smoothState.min.js"></script> 

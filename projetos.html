@@ -17,11 +17,7 @@
     <link href="css/swiper.css" rel="stylesheet" type="text/css">
     <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
-    body,td,th {
-	font-family: Raleway, Helvetica, Arial, sans-serif;
-}
-    </style>
+    <link href="css/rdorval.css" rel="stylesheet" type="text/css">
 
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -29,6 +25,65 @@
     <script type="text/javascript">
         app.initialize();
     </script>
+        <script>
+	function GetQueryString(a)
+	{
+		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+	
+		if (typeof a === "string")
+			a = a.split("#").join("&").split("&");
+	
+		// se não há valores, retorna um objeto vazio
+		if (!a) return {};
+	
+		var b = {};
+		for (var i = 0; i < a.length; ++i)
+		{
+			// obtem array com chave/valor
+			var p = a[i].split('=');
+	
+			// se não houver valor, ignora o parametro
+			if (p.length != 2) continue;
+	
+			// adiciona a propriedade chave ao objeto de retorno
+			// com o valor decodificado, substituindo `+` por ` `
+			// para aceitar URLs codificadas com `+` ao invés de `%20`
+			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+		}
+		// retorna o objeto criado
+		return b;
+	}
+	
+	// uso
+	var qs = GetQueryString();
+	
+	
+	$(document).ready(function(){
+		
+		var arquivo = 'https://portalulb.org.br/json/projetos.php';
+		
+		$('#resultado').html('Carregando dados...');
+					  
+		var retorno;
+		var qtde;
+	   
+            // Estrutura de resultado.
+            $.getJSON(arquivo, function(data){
+                this.qtd = data.Projetos.length;
+                this.retorno = '';
+				
+    
+                for (i = 0; i < this.qtd; i++)
+                {
+                    this.retorno +='<a href="projeto.html?projeto='+ data.Projetos[i].codigo +'&nome='+ data.Projetos[i].nome +'" class="mix">';
+					this.retorno +='<img src="https://portalulb.org.br/aplicativo/projetos/'+ data.Projetos[i].imagem + '" alt="'+ data.Projetos[i].nome +'">';
+					this.retorno +='</a>'; 
+                }
+			
+                $('#resultado').html(this.retorno);
+            });
+	});
+	</script>
   <meta charset="utf-8">
 </head>
 
@@ -81,34 +136,37 @@
             <h4 class="m-0">
             <p class="text-flow m-0">PROJETOS</p>
         </div>
+
+        <div class="divider"></div>
         
+        <div class="valign center-align w-100">
+            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
+        </div>
+
+        <div class="divider"></div>
+
         <div id="filter">
           <!-- Swipeboox Contents -->
           <section id="image-filter">
             <div class="wrap small-width">
               <div data-pswp-uid="1" id="demo-gallery" class="demo-gallery">
-                <a href="projeto1.html" class="mix category-1">
-                  <img src="img/1.jpg" alt="image">
-                </a>
-                <a href="projeto2.html" class="mix category-1">
-                  <img src="img/2.jpg" alt="image">
-                </a>
-                <a href="projeto3.html" class="mix category-2">
-                  <img src="img/3.jpg" alt="image">
-                </a>
-                <a href="projeto4.html" class="mix category-2">
-                  <img src="img/4.jpg" alt="image">
-                </a>
+                  <div id="resultado"></div>
               </div>
             </div>
           </section> <!-- End of Swipebox Contents -->
         </div>
 
-        <div class="clr"></div>
-        <div class="p-20"></div>
 
       </div> 
       <!-- End of Page Contents -->
+        <div class="divider"></div>
+
+        <div class="valign center-align w-100">
+            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
+        </div>
+
+        <div class="divider"></div>
+
 
     </div><!-- End of Main Container -->
     

@@ -947,11 +947,12 @@ textarea.materialize-textarea {
     margin: 0;
 }
 .mix {
-    display: none;
-    padding: 1px;
+	/*display: none;*/
+	padding: 1px;
 }
 .mix figure {
-    display: none;
+	/* display: none;*/
+	/*ATUALIZADO 15/12/2016*/
 }
 #filter.grid .mix {
     width: 50%;

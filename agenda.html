@@ -60,7 +60,7 @@
 	
 	$(document).ready(function(){
 		
-		var arquivo = 'http://www.portalulb.org.br/json/agenda.php';
+		var arquivo = 'https://portalulb.org.br/json/agenda.php';
 		
 		$('#resultado').html('Carregando dados...');
 					  
@@ -80,9 +80,9 @@
 					this.retorno +='<p>'+ data.Calendario[i].nome +'</p>';
 					this.retorno +='<span class="activity-time small grey-text"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Calendario[i].inicio +''; 
 					
-					if(data.Calendario[i].fim == null || data.Calendario[i].fim=="0000-00-00")
+					if(data.Calendario[i].fim == null || data.Calendario[i].fim == "0000-00-00")
 					{
-					this.retorno += 'vazio';
+					this.retorno += '';
 					}
 					else
 					{
