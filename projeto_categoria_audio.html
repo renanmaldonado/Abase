@@ -64,7 +64,7 @@
 	
 	$(document).ready(function(){
 		
-		var arquivo = 'https://portalulb.org.br/json/projeto.php';
+		var arquivo = 'https://portalulb.org.br/json/projeto_categoria_audio.php';
 		
 		$('#resultado').html('Carregando dados...');
 					  
@@ -72,54 +72,33 @@
 		var qtde;
 		var codigo;
 		
-		codigos = qs['projeto'];
+		codigos = qs['categoria'];
+		tipo = qs['tipo'];
 	   
             // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
-                this.qtd = data.Projeto.length;
+                this.qtd = data.Item.length;
 				this.retorno = '';
-	
+				
 				
 				for (i = 0; i < 1; i++)
 				{
-						
-						if(data.Projeto[i].codigo == codigos)
+						if(data.Item[i].codigo == codigos)
 						{
-							this.retorno +='<div class="m-20 z-depth-1 animated fadein">';
-							this.retorno +='<img src="https://portalulb.org.br/aplicativo/projetos/'+ data.Projeto[i].imagem + '" alt="'+ data.Projeto[i].nome +'">';
-							this.retorno +='</div>';
 							this.retorno +='<div class="p-20 animated fadeinup delay-1">';
-							this.retorno +='<h2>'+ data.Projeto[i].nome +'</h2>';
-							this.retorno +='<p>'+ data.Projeto[i].descricao +'</p>';
-							this.retorno +='</div>';
+							this.retorno +='<span class="small"> '+ data.Item[i].nome_proj +' / '+ data.Item[i].nome +'</span>';
+							this.retorno +='<div class="divider"></div>';
+							
 							for (i = 0; i < this.qtd; i++)
-							{
-							
-							this.retorno +='<div class="collection">';
-							if(data.Projeto[i].tipo == '1')
-							{
-								this.retorno +='<a href="projeto_categoria_audio.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
-
-							}
-							else if(data.Projeto[i].tipo == '2')
-							{
-								this.retorno +='<a href="projeto_categoria_texto.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
-
-							}
-							else if(data.Projeto[i].tipo == '3')
-							{
-								this.retorno +='<a href="projeto_categoria_agenda.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
-
-							}
-							else if(data.Projeto[i].tipo == '4')
-							{
-								this.retorno +='<a href="projeto_categoria_arquivo.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
+						 	{
+							this.retorno +='<div class="divider"></div>';
+							this.retorno +='<p>'+ data.Item[i].nome_item +'</p>';
+							this.retorno +='<audio controls>';
+							this.retorno +='<source src="https://portalulb.org.br/aplicativo/audios/'+ data.Item[i].arquivo +'" type="audio/mpeg">';
+							this.retorno +='Seu dispositivo não suporta este áudio.';
+							this.retorno +='</audio>';
 							}
 							this.retorno +='</div>';
-            
-							}
-							
-
 						}
 				}
 				$('#resultado').html(this.retorno);
