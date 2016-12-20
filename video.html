@@ -19,12 +19,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/rdorval.css" rel="stylesheet" type="text/css">
 
-    <style type="text/css">
-    body,td,th {
-	font-family: Raleway, Helvetica, Arial, sans-serif;
-}
-    </style>
-    
+   
 	<script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
@@ -54,14 +49,16 @@
 					var str = data.Videos.entry[i].id;
 					var res = str.replace('yt:video:', '');
 					
-					this.retorno += '<div class="one-half-responsive">';
-					this.retorno += '<h3>' + data.Videos.entry[i].title + '</h3>';
+				
+					this.retorno += '<div class="p-20 animated fadeinright delay-1">';
+					this.retorno += '<h5 class="uppercase">' + data.Videos.entry[i].title + '</h5>';
 					this.retorno += '<p>';
 					this.retorno += data.Videos.entry[i].author.name;
 					this.retorno += '</p>';
-					this.retorno += '<div class="responsive-video full-bottom">';
-					this.retorno += '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + res + '" frameborder="0" allowfullscreen></iframe>';
+					this.retorno += '<div class="video-container m-b-20">';
+					this.retorno += '<iframe width="853" height="480" src="https://www.youtube.com/embed/' + res + '" frameborder="0" allowfullscreen></iframe>';
 					this.retorno += '</div>';
+			        this.retorno += '<div class="divider"></div>';
 					this.retorno += '</div>';
 				}
 				$('#resultado').html(this.retorno);
@@ -132,9 +129,7 @@
 
         <div class="divider"></div>
           
-          <div class="video-container m-b-20">
-            	<div id="resultado"></div>
-          </div>
+        <div id="resultado"></div>
 
         <div class="divider"></div>
 

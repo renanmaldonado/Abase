@@ -17,11 +17,7 @@
     <link href="css/swiper.css" rel="stylesheet" type="text/css">
     <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
-    body,td,th {
-	font-family: Raleway, Helvetica, Arial, sans-serif;
-}
-    </style>
+    <link href="css/rdorval.css" rel="stylesheet" type="text/css">
 
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
@@ -32,8 +28,8 @@
   <meta charset="utf-8">
 </head>
 
-  <body>
-    <div id="main"> <!-- Main Container -->
+  <body style="background-color:#030303;">
+    <div> <!-- Main Container -->
 
       <!-- Sidebar -->
       <ul id="slide-out" class="side-nav primary-color collapsible">
@@ -65,8 +61,11 @@
       <!-- Toolbar -->
       <div id="toolbar" class="primary-color">
         <div class="title">ABASE</div>
-        <div class="open-right" id="open-right" data-activates="slide-out">
+        < <div class="open-right" id="open-right" data-activates="slide-out">
           <i class="ion-android-menu"></i>
+        </div>
+        <div class="open-right" id="open-right" data-activates="slide-out">
+         <a href="index.html" class="no-child"><i class="ion-ios-home"></i> </a>
         </div>
       </div>
       <!-- End of Toolbar -->
@@ -77,10 +76,11 @@
         <div class="divider"></div>
 
         <div class="p-20 center">
-            <i class="ion-android-phone-portrait"></i>
-            <h4 class="m-0">
-            <p class="text-flow m-0">MIDIAS</p>
+            <h4 class="m-0" style="color:#FFF;">MIDIAS</h4>
         </div>
+        
+        <div class="divider"></div>
+
         
         <div id="filter">
           <!-- Swipeboox Contents -->
@@ -88,21 +88,29 @@
             <div class="wrap small-width">
               <div data-pswp-uid="1" id="demo-gallery" class="demo-gallery">
                 <a href="video.html" class="mix">
-                  <img src="img/1.jpg" alt="image">
+                  <img src="img/videos.png" alt="image">
                 </a>
                 <a href="imagens.html" class="mix">
-                  <img src="img/2.jpg" alt="image">
+                  <img src="img/imagens.png" alt="image">
                 </a>
                 <a href="estudos.html" class="mix">
-                  <img src="img/3.jpg" alt="image">
+                  <img src="img/estudos.png" alt="image">
                 </a>
                 <a href="licoes.html" class="mix">
-                  <img src="img/4.jpg" alt="image">
+                  <img src="img/licoes.png" alt="image">
                 </a>
               </div>
             </div>
           </section> <!-- End of Swipebox Contents -->
         </div>
+        
+        <div class="clr"></div>
+        <div class="p-20"></div>
+
+        <div class="valign center-align w-100">
+            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
+        </div>
+
 
         <div class="clr"></div>
         <div class="p-20"></div>
