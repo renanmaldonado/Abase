@@ -12,10 +12,7 @@
     <link href="css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
     <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
-    <link href="css/swiper.css" rel="stylesheet" type="text/css">
-    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/rdorval.css" rel="stylesheet" type="text/css">
 
@@ -74,7 +71,7 @@
     
                 for (i = 0; i < this.qtd; i++)
                 {
-                    this.retorno += '<a href="biblia_livro.html?livro=' + data.Livro[i].liv_abreviado + '&titulo='+ data.Livro[i].liv_nome + '&total=' + data.Livro[i].total + '" class="waves-effect waves-light btn-large primary-color animated bouncein delay-4" style="margin:10px;width:163px;font-size:8px;" >';
+                    this.retorno += '<a href="biblia_livro.html?livro=' + data.Livro[i].liv_abreviado + '&titulo='+ data.Livro[i].liv_nome + '&total=' + data.Livro[i].total + '" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;" >';
                     this.retorno += data.Livro[i].liv_nome;
                     this.retorno += '</a>';
 
