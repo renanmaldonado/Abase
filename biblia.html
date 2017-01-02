@@ -74,8 +74,7 @@
     
                 for (i = 0; i < this.qtd; i++)
                 {
-                    this.retorno += '<a href="biblia_livro.html?livro=' + data.Livro[i].liv_abreviado + '&titulo='+ data.Livro[i].liv_nome + '&total=' + data.Livro[i].total + '" class="" >';
-                    this.retorno += '<br>';
+                    this.retorno += '<a href="biblia_livro.html?livro=' + data.Livro[i].liv_abreviado + '&titulo='+ data.Livro[i].liv_nome + '&total=' + data.Livro[i].total + '" class="waves-effect waves-light btn-large primary-color m-20 animated bouncein delay-4" >';
                     this.retorno += data.Livro[i].liv_nome;
                     this.retorno += '</a>';
 
@@ -145,6 +144,7 @@
             <a class="btn-large" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
         </div>
         
+         
          <div id="resultado"></div>
          
         <div class="divider"></div>
