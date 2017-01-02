@@ -25,7 +25,7 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-        <script>
+    <script>
 	function GetQueryString(a)
 	{
 		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
@@ -87,7 +87,7 @@
   <meta charset="utf-8">
 </head>
 
-  <body>
+  <body class="back_body">
     <div> <!-- Main Container -->
 
       <!-- Sidebar -->
@@ -123,6 +123,9 @@
         <div class="open-right" id="open-right" data-activates="slide-out">
           <i class="ion-android-menu"></i>
         </div>
+        <div class="open-right" id="open-right" data-activates="slide-out">
+         <a href="index.html" class="no-child"><i class="ion-ios-home"></i> </a>
+        </div>
       </div>
       <!-- End of Toolbar -->
       
@@ -132,19 +135,11 @@
         <div class="divider"></div>
 
         <div class="p-20 center">
-            <i class="ion-android-bulb"></i>
-            <h4 class="m-0">
-            <p class="text-flow m-0">PROJETOS</p>
+            <h4 class="m-0 font_branca">PROJETOS</h4>
         </div>
 
         <div class="divider"></div>
         
-        <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-        </div>
-
-        <div class="divider"></div>
-
         <div id="filter">
           <!-- Swipeboox Contents -->
           <section id="image-filter">
@@ -160,13 +155,6 @@
       </div> 
       <!-- End of Page Contents -->
         <div class="divider"></div>
-
-        <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-        </div>
-
-        <div class="divider"></div>
-
 
     </div><!-- End of Main Container -->
     
