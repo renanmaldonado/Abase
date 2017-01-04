@@ -15,14 +15,14 @@
     <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/rdorval.css" rel="stylesheet" type="text/css">
-    
+
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
     </script>
-    <script>
+        <script>
 	function GetQueryString(a)
 	{
 		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
@@ -54,58 +54,41 @@
 	// uso
 	var qs = GetQueryString();
 	
+	
 	$(document).ready(function(){
 		
-		var arquivo = 'https://portalulb.org.br/json/projeto_categoria_agenda.php';
+		var arquivo = 'https://portalulb.org.br/json/campos.php';
 		
 		$('#resultado').html('Carregando dados...');
 					  
 		var retorno;
 		var qtde;
-		var codigo;
-		
-		codigos = qs['categoria'];
-		tipo = qs['tipo'];
 	   
             // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
-                this.qtd = data.Item.length;
-				this.retorno = '';
+                this.qtd = data.Campos.length;
+                this.retorno = '';
 				
-				
-				for (i = 0; i < 1; i++)
-				{
-						if(data.Item[i].codigo == codigos)
-						{
-							this.retorno +='<div class="activities">';
-							for (i = 0; i < this.qtd; i++)
-							{
-								this.retorno +='<div class="activity animated fadeinright delay-1">';
-								this.retorno +='<p>'+ data.Item[i].titulo +'</p>';
-								this.retorno +='<span class="activity-time small grey-text"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Item[i].inicio +''; 
-								
-								if(data.Item[i].fim == null || data.Item[i].fim == "0000-00-00")
-								{
-								this.retorno += '';
-								}
-								else
-								{
-								this.retorno += ' - '+ data.Item[i].fim +'';
-								}
-								
-								this.retorno += '</span></span>';
-								this.retorno += '<a href="evento.html?evento='+ data.Item[i].codigo +'&nome='+ data.Item[i].nome + '">'; 
-								this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
-								this.retorno += '</a>';
-								this.retorno +='</div>';
-							}
-							this.retorno +='</div>';
-						}
-				}
-				$('#resultado').html(this.retorno);
+    
+                for (i = 0; i < this.qtd; i++)
+                {
+					this.retorno +='<div class="media-top-object animated fadeinright delay-2">';
+					this.retorno +='<img src="img/user4.jpg" alt="" class="media-left avatar">';
+					this.retorno +='<div class="media-body">';
+					this.retorno += '<a href="cadastro.html?codigo='+ data.Campos[i].cod +'&nome='+ data.Campos[i].nome + '">'; 
+					this.retorno +='<span>'+ data.Campos[i].nome +'</span>';
+					this.retorno += '</a>';
+					this.retorno +='</div>';
+					this.retorno +='</div>';
+
+                }
+			
+                $('#resultado').html(this.retorno);
             });
 	});
 	</script>
+
+  <meta charset="utf-8">
 </head>
 
   <body>
@@ -133,11 +116,12 @@
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="campos.html" class="no-child"><i class="ion-clipboard"></i> Cadastro </a></li>
         <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
 
-     <!-- Toolbar -->
+      <!-- Toolbar -->
       <div id="toolbar" class="primary-color">
         <div class="title">ABASE</div>
         <div class="open-right" id="open-right" data-activates="slide-out">
@@ -152,27 +136,27 @@
       <!-- Page Contents -->
       <div class="page animated fadeinright">
 
+        <!-- Comments -->
+        <div class="comments grey lighten-4">
+          <h5>Campos </h5>
+          <div id="resultado"></div>
+        
+        <div class="divider"></div>
+        
+        <div class="valign center-align">
+            <a class="btn-large" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
+        </div>
+        
         <div class="divider"></div>
 
-        <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="projetos.html"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-        </div>
 
-        <div id="resultado" align="justify" style="text-align: justify; white-space: pre-wrap;"></div>
-        
-      </div> <!-- End of Page Contents -->
-      <div class="divider"></div>
-
-      <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="projetos.html"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-      </div>
-
-      <div class="divider"></div>
+      </div> 
+      <!-- End of Page Contents -->
+      
 
 
     </div><!-- End of Main Container -->
+    
     
     <script src="js/jquery.swipebox.min.js"></script>   
     <script src="js/jquery.smoothState.min.js"></script> 

@@ -15,7 +15,7 @@
     <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="css/rdorval.css" rel="stylesheet" type="text/css">
-    
+
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
@@ -23,89 +23,14 @@
         app.initialize();
     </script>
     <script>
-	function GetQueryString(a)
-	{
-		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
-	
-		if (typeof a === "string")
-			a = a.split("#").join("&").split("&");
-	
-		// se não há valores, retorna um objeto vazio
-		if (!a) return {};
-	
-		var b = {};
-		for (var i = 0; i < a.length; ++i)
-		{
-			// obtem array com chave/valor
-			var p = a[i].split('=');
-	
-			// se não houver valor, ignora o parametro
-			if (p.length != 2) continue;
-	
-			// adiciona a propriedade chave ao objeto de retorno
-			// com o valor decodificado, substituindo `+` por ` `
-			// para aceitar URLs codificadas com `+` ao invés de `%20`
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		// retorna o objeto criado
-		return b;
-	}
-	
-	// uso
-	var qs = GetQueryString();
-	
 	$(document).ready(function(){
-		
-		var arquivo = 'https://portalulb.org.br/json/projeto_categoria_agenda.php';
-		
-		$('#resultado').html('Carregando dados...');
-					  
-		var retorno;
-		var qtde;
-		var codigo;
-		
-		codigos = qs['categoria'];
-		tipo = qs['tipo'];
-	   
-            // Estrutura de resultado.
-            $.getJSON(arquivo, function(data){
-                this.qtd = data.Item.length;
-				this.retorno = '';
-				
-				
-				for (i = 0; i < 1; i++)
-				{
-						if(data.Item[i].codigo == codigos)
-						{
-							this.retorno +='<div class="activities">';
-							for (i = 0; i < this.qtd; i++)
-							{
-								this.retorno +='<div class="activity animated fadeinright delay-1">';
-								this.retorno +='<p>'+ data.Item[i].titulo +'</p>';
-								this.retorno +='<span class="activity-time small grey-text"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Item[i].inicio +''; 
-								
-								if(data.Item[i].fim == null || data.Item[i].fim == "0000-00-00")
-								{
-								this.retorno += '';
-								}
-								else
-								{
-								this.retorno += ' - '+ data.Item[i].fim +'';
-								}
-								
-								this.retorno += '</span></span>';
-								this.retorno += '<a href="evento.html?evento='+ data.Item[i].codigo +'&nome='+ data.Item[i].nome + '">'; 
-								this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
-								this.retorno += '</a>';
-								this.retorno +='</div>';
-							}
-							this.retorno +='</div>';
-						}
-				}
-				$('#resultado').html(this.retorno);
-            });
+	
+    $("#cod_igreja").load("http://portalulb.org.br/json/combo_igrejas.php");
+    $("#depto").load("http://portalulb.org.br/json/deptos.php");
+	
 	});
 	</script>
+    
 </head>
 
   <body>
@@ -133,11 +58,12 @@
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="login.html" class="no-child"><i class="ion-person"></i> Login </a></li>
         <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
 
-     <!-- Toolbar -->
+      <!-- Toolbar -->
       <div id="toolbar" class="primary-color">
         <div class="title">ABASE</div>
         <div class="open-right" id="open-right" data-activates="slide-out">
@@ -152,27 +78,50 @@
       <!-- Page Contents -->
       <div class="page animated fadeinright">
 
-        <div class="divider"></div>
+        <!-- Form Inputs --> 
+        <div class="form-inputs p-20">
 
-        <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="projetos.html"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
+          <h4 class="center">Preencha o Formulário</h4>
+          <div>
+            <div>
+                <p>Selecione sua Igreja</p>
+                <select id="cod_igreja" name="cod_igreja" class="browser-default">
+                <option value="0">Carregando...</option>
+                </select>
+            </div>
+            <div class="divider"></div>
+            <div class="input-field animated fadeinright">
+              <i class="ion-ios-person-outline prefix"></i>
+              <input id="nome" type="text" class="validate">
+              <label for="nome">Nome</label>
+            </div>
+          </div>
+          <div class="input-field animated fadeinright delay-2">
+            <i class="ion-ios-email-outline prefix"></i>
+            <input id="email" type="email">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-field animated fadeinright delay-3">
+            <i class="ion-ios-telephone-outline prefix"></i>
+            <input id="celular" type="text" class="validate">
+            <label for="celular">Celular</label>
+          </div>
+          <div>
+          <p>Selecione seu Departamento</p>
+          <div id="depto"></div>
+       	  </div>
+          <div class="divider"></div>
+
+          <a class="waves-effect waves-light btn-large primary-color block animated bouncein delay-6" href="index.html">Cadastrar</a>
         </div>
+        <!-- End of Form -->
 
-        <div id="resultado" align="justify" style="text-align: justify; white-space: pre-wrap;"></div>
         
-      </div> <!-- End of Page Contents -->
-      <div class="divider"></div>
-
-      <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="projetos.html"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-      </div>
-
-      <div class="divider"></div>
-
+      </div> 
+      <!-- End of Page Contents -->
 
     </div><!-- End of Main Container -->
+    
     
     <script src="js/jquery.swipebox.min.js"></script>   
     <script src="js/jquery.smoothState.min.js"></script> 
