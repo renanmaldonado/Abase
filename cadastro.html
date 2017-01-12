@@ -23,14 +23,44 @@
         app.initialize();
     </script>
     <script>
+		function GetQueryString(a)
+	{
+		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+	
+		if (typeof a === "string")
+			a = a.split("#").join("&").split("&");
+	
+		// se não há valores, retorna um objeto vazio
+		if (!a) return {};
+	
+		var b = {};
+		for (var i = 0; i < a.length; ++i)
+		{
+			// obtem array com chave/valor
+			var p = a[i].split('=');
+	
+			// se não houver valor, ignora o parametro
+			if (p.length != 2) continue;
+	
+			// adiciona a propriedade chave ao objeto de retorno
+			// com o valor decodificado, substituindo `+` por ` `
+			// para aceitar URLs codificadas com `+` ao invés de `%20`
+			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+		}
+		// retorna o objeto criado
+		return b;
+	}
+
+	var qs = GetQueryString();
+
 	$(document).ready(function(){
 	
-    $("#cod_igreja").load("http://portalulb.org.br/json/combo_igrejas.php");
-    $("#cod_depto").load("http://portalulb.org.br/json/deptos.php");
+    var arquivo2 = "https://portalulb.org.br/json/combo_igrejas.php?codigo=" + qs['codigo'];
+    $("#cod_igreja").load(arquivo2);
+    $("#cod_depto").load("https://portalulb.org.br/json/deptos.php");
 	
 	});
 	</script>
-    
 </head>
 
   <body>
@@ -83,6 +113,7 @@
 
           <h4 class="center">Preencha o Formulário</h4>
           <div>
+            <form name="cadastro" action="insere_cadastro.html" method="get">
             <div>
                 <p>Selecione sua Igreja</p>
                 <select id="cod_igreja" name="cod_igreja" class="browser-default">
@@ -92,32 +123,33 @@
             <div class="divider"></div>
             <div class="input-field animated fadeinright">
               <i class="ion-ios-person-outline prefix"></i>
-              <input id="nome" type="text" class="validate">
-              <label for="nome">Nome</label>
+              <input id="nome_user" type="text" name="nome_user" class="validate" placeholder="Digite seu Nome" value="" required>
             </div>
-          </div>
           <div class="input-field animated fadeinright delay-2">
             <i class="ion-ios-email-outline prefix"></i>
-            <input id="email" type="email">
-            <label for="email">Email</label>
+            <input id="email" type="email" name="email" class="validate" placeholder="Digite seu Email" value="" required>
           </div>
           <div class="input-field animated fadeinright delay-3">
             <i class="ion-ios-telephone-outline prefix"></i>
-            <input id="celular" type="text" class="validate">
-            <label for="celular">Celular</label>
+            <input id="celular" type="text" name="celular" class="validate" placeholder="Digite seu Celular com DDD" value="" maxlength="12" required>
           </div>
           <div>
           <div class="divider"></div>
-          <p>Selecione seu Departamento</p>
-            <select id="cod_depto" name="cod_depto" class="browser-default" multiple style="height:auto;">
-                <option value="0">Carregando...</option>
-            </select>
-       	  </div>
+          <div id="cod_depto"></div>
           <div class="divider"></div>
 
-          <a class="waves-effect waves-light btn-large primary-color block animated bouncein delay-6" href="index.html">Cadastrar</a>
+           <div style="text-align:center;">
+          <script>
+			function Cancela() {
+				window.location.assign("index.html")
+			}
+			</script>
+           <input name="submit" type="submit" value="Cadastrar" class="waves-light btn-large primary-color bouncein delay-6" >
+           <input name="submit2" type="button" value="Cancelar" class="waves-light btn-large primary-color bouncein delay-6" onclick="Cancela()" >
+		   </div>
         </div>
         <!-- End of Form -->
+        </form> 
 
         
       </div> 
