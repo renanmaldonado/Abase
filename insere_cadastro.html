@@ -80,7 +80,7 @@
 		exit;
 	}
 
-/*	$(document).ready(function()
+	$(document).ready(function()
 	{
 		//Se esta rodando no App ou no Browser
 		window.isphone = false;
@@ -99,18 +99,15 @@
 			onDeviceReady();
 		}
 	});
-*/	
+	
 	//Funcões e configurações
 
-/*	function onDeviceReady()
+	function onDeviceReady()
 	{
-*/		
-$(document).ready(function(){
-	var arquivo;
-
-
 		
-/*		//Sem conexão
+	var arquivo;
+		
+		//Sem conexão
 		if(networkState == 'none')
 		{
 			window.location.href='conexao.html?status=Sem conexão';
@@ -134,8 +131,8 @@ $(document).ready(function(){
 			window.location.href='conexao.html?status=Conexão insuficiente (2G)';
 			exit;
 		}
-*/		
-		arquivo = 'https://portalulb.org.br/json/cadastro_usuario.php?' + window.location.search.substr(1);;
+		
+		arquivo = 'https://portalulb.org.br/json/cadastro_usuario.php?id=' + device.uuid + '&' + window.location.search.substr(1);
 
 		
 		$.getJSON(arquivo, function(data)
@@ -147,9 +144,7 @@ $(document).ready(function(){
 			exit;
 			
 		});
-});
-/*	}
-*/
+	}
     </script>
 </head>
 
