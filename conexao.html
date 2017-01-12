@@ -23,128 +23,42 @@
         app.initialize();
     </script>
 	<script>
-	function GetQueryString(a)
+    function GetQueryString(a)
     {
-		
-            a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
-            
-						
-            if (typeof a === "string")
+        a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+    
+        if (typeof a === "string")
             a = a.split("#").join("&").split("&");
-            
-            // se não há valores, retorna um objeto vazio
-            if (!a) return {};
-            
-            var b = {};
-			
-            for (var i = 0; i < a.length; ++i)
-            {
-                // obtem array com chave/valor
-                var p = a[i].split('=');
-                
-                // se não houver valor, ignora o parametro
-                if (p.length != 2) continue;
-                
-                // adiciona a propriedade chave ao objeto de retorno
-                // com o valor decodificado, substituindo `+` por ` `
-                // para aceitar URLs codificadas com `+` ao invés de `%20`
-                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-				
-            }
-            // retorna o objeto criado
-			
-			return b;
+    
+        // se não há valores, retorna um objeto vazio
+        if (!a) return {};
+    
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            // obtem array com chave/valor
+            var p = a[i].split('=');
+    
+            // se não houver valor, ignora o parametro
+            if (p.length != 2) continue;
+    
+            // adiciona a propriedade chave ao objeto de retorno
+            // com o valor decodificado, substituindo `+` por ` `
+            // para aceitar URLs codificadas com `+` ao invés de `%20`
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
         }
+        // retorna o objeto criado
+        return b;
+    }
     
+    // uso
     var qs = GetQueryString();
-	
     
-    if(qs['cod_igreja'] == "")
-    {
-        window.location.href='mensagem.html?txt=Você precisa selecionar a igreja, por favor!';
-        exit;
-    }
-    else if(qs['nome_user'] == "")
-    {
-        window.location.href='mensagem.html?txt=Você precisa preencher o Nome completo, por favor!';
-        exit;
-    }
-    else if(qs['email'] == "")
-    {
-        window.location.href='mensagem.html?txt=Você precisa preencher o campo E-mail, por favor!';
-        exit;
-    }
-	else if(qs['celular'] == "")
-	{
-		window.location.href='mensagem.html?txt=Você precisa preencher o campo Celular, por favor!';
-		exit;
-	}
-
-	$(document).ready(function()
-	{
-		//Se esta rodando no App ou no Browser
-		window.isphone = false;
-		
-		if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
-		{
-			window.isphone = true;
-		}
-						  
-		if( window.isphone )
-		{
-			document.addEventListener("deviceready", onDeviceReady, false);
-		}
-		else
-		{
-			onDeviceReady();
-		}
-	});
-	
-	//Funcões e configurações
-
-	function onDeviceReady()
-	{
-		
-	var arquivo;
-		
-		//Sem conexão
-		if(networkState == 'none')
-		{
-			window.location.href='conexao.html?status=Sem conexão';
-			exit;
-		}
-		//Conexão desconhecida
-		else if(networkState == 'unknown')
-		{
-			window.location.href='conexao.html?status=Conexão desconhecida';
-			exit;
-		}
-		//Conexão genérica
-		else if(networkState == 'cell')
-		{
-			window.location.href='conexao.html?status=Conexão génerica ou desconhecida';
-			exit;
-		}
-		//Conexão 2G
-		else if(networkState == 'cell_2g')
-		{
-			window.location.href='conexao.html?status=Conexão insuficiente (2G)';
-			exit;
-		}
-		
-		arquivo = 'https://portalulb.org.br/json/cadastro_usuario.php?' + window.location.search.substr(1);
-
-		
-		$.getJSON(arquivo, function(data)
-		{
-			this.qtd = data.Mensagem.length;
-            
-			alert(data.Mensagem.msg);
-			window.location.href= data.Mensagem.url;
-			exit;
-			
-		});
-	}
+    $(document).ready(function(){
+        
+        document.getElementById("motivo").innerHTML = '<strong>Status da conexão: </strong>' + qs['status'];
+    
+    });
     </script>
 </head>
 
@@ -192,8 +106,10 @@
       
       <!-- Page Contents -->
       <div class="page animated fadeinright">
-
-        
+      <h5>Atenção</h5>
+      <p>É preciso estar conectado na internet para usar esta funcionalidade!</p>
+      <p>Nem todas as funcionalidades desse App funcionam off-line...</p>
+      <p id="motivo"></p>
       </div> 
       <!-- End of Page Contents -->
 
