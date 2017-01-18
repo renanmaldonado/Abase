@@ -109,7 +109,7 @@
      var info
 
 		
-		//Sem conexão
+/*		//Sem conexão
 		if(networkState == 'none')
 		{
 			window.location.href='conexao.html?status=Sem conexão';
@@ -132,10 +132,12 @@
 		{
 			window.location.href='conexao.html?status=Conexão insuficiente (2G)';
 			exit;
-		}
+		}*/
 		
 		arquivo = 'https://portalulb.org.br/json/cadastro_usuario.php?id=' + device.uuid + '&' + window.location.search.substr(1);
 		
+		alert(arquivo);
+		exit;
 		$.getJSON(arquivo, function(data)
 		{
 			this.qtd = data.Mensagem.length;
