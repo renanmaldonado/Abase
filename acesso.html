@@ -50,7 +50,7 @@ function onDeviceReady()
     var info
     var networkState = navigator.connection.type;
     
-    //Sem conexão
+/*    //Sem conexão
     if(networkState == 'none')
     {
         window.location.href='conexao.html?status=Sem conexão';
@@ -74,7 +74,7 @@ function onDeviceReady()
         window.location.href='conexao.html?status=Conexão insuficiente (2G)';
         exit;
     }
-    
+*/    
     arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
     
     $.getJSON(arquivo, function(data)
