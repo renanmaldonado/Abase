@@ -83,14 +83,14 @@ function onDeviceReady()
        {
               for(var i in data.Aparelho)
               {
-                    if(data.Aparelho[i].cod_usuario == '')
+                    if(data.Aparelho[i].cod_user == '')
                     {
                         window.location.href='campos.html';
                         exit;
                     }
                     else
                     {
-                        window.location.href='perfil.html?cod_usuario=' + data.Aparelho[i].cod_usuario;
+                        window.location.href='perfil.html?cod_usuario=' + data.Aparelho[i].cod_user;
                         exit;
                     }
               }
