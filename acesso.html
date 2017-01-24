@@ -25,22 +25,22 @@
 <script>
 $(document).ready(function()
 {
-    //Se esta rodando no App ou no Browser
-    window.isphone = false;
-    
-    if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
-    {
-        window.isphone = true;
-    }
-                      
-    if( window.isphone )
-    {
-        document.addEventListener("deviceready", onDeviceReady, false);
-    }
-    else
-    {
-        onDeviceReady();
-    }
+	//Se esta rodando no App ou no Browser
+	window.isphone = false;
+	
+	if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
+	{
+		window.isphone = true;
+	}
+					  
+	if( window.isphone )
+	{
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	else
+	{
+		onDeviceReady();
+	}
 });
 
 //Funcões e configurações
@@ -48,8 +48,9 @@ function onDeviceReady()
 {
     var arquivo;
     var info
-    var networkState = navigator.connection.type;
-    
+ 
+/*    var networkState = navigator.connection.type;
+*/    
 /*    //Sem conexão
     if(networkState == 'none')
     {
@@ -75,8 +76,9 @@ function onDeviceReady()
         exit;
     }
 */    
-    arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
     
+	arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
+		
     $.getJSON(arquivo, function(data)
     {
        if(data.Aparelho != null)
@@ -90,7 +92,7 @@ function onDeviceReady()
                     }
                     else
                     {
-                        window.location.href='perfil.html?cod_usuario=' + data.Aparelho[i].cod_user;
+                        window.location.href='perfil.html?cod_user=' + data.Aparelho[i].cod_user;
                         exit;
                     }
               }
