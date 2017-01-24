@@ -57,8 +57,8 @@ var qs = GetQueryString();
 $(document).ready(function(){
 	
 	var info
-    var arquivo = 'https://portalulb.org.br/json/perfil.php?cod_usuario=' + qs['cod_usuario'];
-    var arquivo2 = "https://portalulb.org.br/json/perfil_cargos.php?cod_usuario=" + qs['cod_usuario'];
+    var arquivo = 'https://portalulb.org.br/json/perfil.php?cod_user=' + qs['cod_user'];
+    var arquivo2 = "https://portalulb.org.br/json/perfil_cargos.php?cod_user=" + qs['cod_user'];
     $("#ajax").load(arquivo2);
 	
 
@@ -68,7 +68,7 @@ function json(){
 	var topo;
 	var codigo;
 	
-	codigo = qs['cod_usuario'];
+	codigo = qs['cod_user'];
 
 	// Resgatar valores.
 	json.prototype.resgatarValores = function(){
