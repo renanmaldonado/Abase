@@ -58,7 +58,7 @@ $(document).ready(function(){
 	
 	var info
     var arquivo = 'https://portalulb.org.br/json/perfil.php?cod_user=' + qs['cod_user'];
-    var arquivo2 = "https://portalulb.org.br/json/perfil_cargos.php?cod_user=" + qs['cod_user'];
+    var arquivo2 = "https://portalulb.org.br/json/perfil_depto.php?cod_user=" + qs['cod_user'];
     $("#ajax").load(arquivo2);
 	
 
@@ -82,10 +82,26 @@ function json(){
 			{
 				//Informações do topo da página
 				this.topo += '<div class="media-body">';
-				this.topo += '<h4>' + data.Pessoa[i].nome_user + '</h4>';
-				this.topo += '<h4>Igreja' + data.Pessoa[i].nome_igreja + '</h4>';
+				this.topo += '<h4 class="center">Dados</h4>';
+                this.topo += '<br>';
+				this.topo += '<h6>Nome: ' + data.Pessoa[i].nome_user + '</h4>';
+				this.topo += '<h6>Igreja: ' + data.Pessoa[i].nome_igreja + '</h4>';
+				this.topo += '<h6>Distrito: ' + data.Pessoa[i].nome_distrito + '</h4>';
+				this.topo += '<h6>Campo: ' + data.Pessoa[i].abrev + '</h4>';
+
 
 				//Informações gerais
+                this.topo += '<br>';
+				this.topo += '<span class="small">';
+				this.topo += '<strong>celular: ' + data.Pessoa[i].celular + '</strong>';
+                this.topo += '<br>';
+				this.topo += '<strong>E-mail: ' + data.Pessoa[i].email + '</strong>';
+                this.topo += '<br>';
+				this.topo += '</span>';
+				this.topo += '</div>';
+				
+				
+				//Cargos Cadastrados
                 this.topo += '<br>';
 				this.topo += '<span class="small">';
 				this.topo += '<strong>celular: ' + data.Pessoa[i].celular + '</strong>';
@@ -160,15 +176,17 @@ obj.resgatarValores();
 
  		  <div id="cabecalho"></div>
           <div class="divider"></div>
+          <div id="ajax"></div>
+          <div class="divider"></div>
 
-           <div style="text-align:center;">
+          <div style="text-align:center;">
           <script>
 			function Cancela() {
 				window.location.assign("index.html")
 			}
 			</script>
-           <input name="submit" type="submit" value="Cadastrar" class="waves-light btn-large primary-color bouncein delay-6" >
-           <input name="submit2" type="button" value="Cancelar" class="waves-light btn-large primary-color bouncein delay-6" onclick="Cancela()" >
+           <input name="submit" type="submit" value="Excluir Cadastro" class="waves-light btn-large primary-color bouncein delay-6" >
+           <input name="submit2" type="button" value="Sair" class="waves-light btn-large primary-color bouncein delay-6" onclick="Cancela()" >
 		   </div>
         </div>
         <!-- End of Form -->
