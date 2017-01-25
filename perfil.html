@@ -81,15 +81,19 @@ function json(){
 			for (i = 0; i < this.qtd; i++)
 			{
 				//Informações do topo da página
-				this.topo += '<h3>' + data.Pessoa[i].nome_usuario + '</h3>';
-				this.topo += '<em>Igreja' + data.Pessoa[i].nome_igreja + '</em>';
-				this.topo += '<em>Clube ' + data.Pessoa[i].nome_clube + '</em>';
-				
+				this.topo += '<div class="media-body">';
+				this.topo += '<h4>' + data.Pessoa[i].nome_user + '</h4>';
+				this.topo += '<h4>Igreja' + data.Pessoa[i].nome_igreja + '</h4>';
+
 				//Informações gerais
-                this.topo += 'celular: ' + '<strong>' + data.Pessoa[i].celular + '</strong>';
                 this.topo += '<br>';
-                this.topo += 'E-mail: ' + '<strong>' + data.Pessoa[i].email + '</strong>';
+				this.topo += '<span class="small">';
+				this.topo += '<strong>celular: ' + data.Pessoa[i].celular + '</strong>';
                 this.topo += '<br>';
+				this.topo += '<strong>E-mail: ' + data.Pessoa[i].email + '</strong>';
+                this.topo += '<br>';
+				this.topo += '</span>';
+				this.topo += '</div>';
 								
 			}
 			$('#cabecalho').html(this.topo);
