@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
-    </script>
+    </script>    
     <script>
 function GetQueryString(a)
 {
@@ -57,7 +57,9 @@ var qs = GetQueryString();
 $(document).ready(function(){
 	
 	var info
-    var arquivo = 'https://portalulb.org.br/json/perfil.php?cod_user=' + qs['cod_user'];
+    var arquivo = 'https://portalulb.org.br/json/agenda_usuario.php?cod_user=' + qs['cod_user'];
+	alert(arquivo);
+	exit;
 	
 
 // Classe para chamar o Json.
