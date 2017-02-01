@@ -23,48 +23,55 @@
         app.initialize();
     </script>
     <script>
-	function GetQueryString(a)
-	{
-		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+function GetQueryString(a)
+{
+    a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+
+    if (typeof a === "string")
+        a = a.split("#").join("&").split("&");
+
+    // se não há valores, retorna um objeto vazio
+    if (!a) return {};
+
+    var b = {};
+    for (var i = 0; i < a.length; ++i)
+    {
+        // obtem array com chave/valor
+        var p = a[i].split('=');
+
+        // se não houver valor, ignora o parametro
+        if (p.length != 2) continue;
+
+        // adiciona a propriedade chave ao objeto de retorno
+        // com o valor decodificado, substituindo `+` por ` `
+        // para aceitar URLs codificadas com `+` ao invés de `%20`
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    // retorna o objeto criado
+    return b;
+}
+
+//Uso
+var qs = GetQueryString();
+
+$(document).ready(function(){
 	
-		if (typeof a === "string")
-			a = a.split("#").join("&").split("&");
+	var info
+    var arquivo = 'https://portalulb.org.br/json/perfil.php?cod_user=' + qs['cod_user'];
 	
-		// se não há valores, retorna um objeto vazio
-		if (!a) return {};
+
+// Classe para chamar o Json.
+function json(){
+	var qtd;
+	var topo;
+	var codigo;
 	
-		var b = {};
-		for (var i = 0; i < a.length; ++i)
-		{
-			// obtem array com chave/valor
-			var p = a[i].split('=');
-	
-			// se não houver valor, ignora o parametro
-			if (p.length != 2) continue;
-	
-			// adiciona a propriedade chave ao objeto de retorno
-			// com o valor decodificado, substituindo `+` por ` `
-			// para aceitar URLs codificadas com `+` ao invés de `%20`
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		// retorna o objeto criado
-		return b;
-	}
-	
-	// uso
-	var qs = GetQueryString();
-	
-	
-	$(document).ready(function(){
-		
-		var arquivo = 'https://portalulb.org.br/json/agenda_usuario.php';
-		
-		$('#resultado').html('Carregando dados...');
-					  
-		var retorno;
-		var qtde;
-	   
-            // Estrutura de resultado.
+	codigo = qs['cod_user'];
+
+	// Resgatar valores.
+	json.prototype.resgatarValores = function(){
+
+		            // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
                 this.qtd = data.Calendario.length;
                 this.retorno = '';
@@ -72,29 +79,38 @@
 				for (i = 0; i < this.qtd; i++)
                 {
 					
-                    this.retorno +='<div class="activities">';
-					this.retorno +='<div class="activity animated fadeinright delay-1">';
-					this.retorno +='<h6>'+ data.Calendario[i].nome +'</h6>';
-					this.retorno +='<p>DEPARTAMENTO: '+ data.Calendario[i].desc_depto +'</p>';
-					this.retorno +='<span class="activity-time small"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Calendario[i].inicio +''; 
+                    this.topo +='<div class="activities">';
+					this.topo +='<div class="activity animated fadeinright delay-1">';
+					this.topo +='<h6>'+ data.Calendario[i].nome +'</h6>';
+					this.topo +='<p>DEPARTAMENTO: '+ data.Calendario[i].desc_depto +'</p>';
+					this.topo +='<span class="activity-time small"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Calendario[i].inicio +''; 
 					
 					if(data.Calendario[i].fim != null)
 					{
-					this.retorno += ' - ' + data.Calendario[i].fim;
+					this.topo += ' - ' + data.Calendario[i].fim;
 					}
-					this.retorno += '</span></span>';
-					this.retorno += '<a href="evento.html?evento='+ data.Calendario[i].codigo +'&nome='+ data.Calendario[i].nome + '">'; 
-					this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
-					this.retorno += '</a>';
-					this.retorno +='</div>';
-					this.retorno +='</div>';
+					this.topo += '</span></span>';
+					this.topo += '<a href="evento.html?evento='+ data.Calendario[i].codigo +'&nome='+ data.Calendario[i].nome + '">'; 
+					this.topo +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
+					this.topo += '</a>';
+					this.topo +='</div>';
+					this.topo +='</div>';
 
                 }
 			
-                $('#resultado').html(this.retorno);
+                $('#resultado').html(this.topo);
             });
-	});
-	</script>
+
+	}
+}
+
+
+// Objeto.
+var obj = new json();
+obj.resgatarValores();
+
+});
+</script>
 </head>
 
   <body>
