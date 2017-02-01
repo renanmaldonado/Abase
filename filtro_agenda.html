@@ -22,89 +22,57 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-    <script>
-	function GetQueryString(a)
+<script>
+$(document).ready(function()
+{
+	//Se esta rodando no App ou no Browser
+	window.isphone = false;
+	
+	if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
 	{
-		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
-	
-		if (typeof a === "string")
-			a = a.split("#").join("&").split("&");
-	
-		// se não há valores, retorna um objeto vazio
-		if (!a) return {};
-	
-		var b = {};
-		for (var i = 0; i < a.length; ++i)
-		{
-			// obtem array com chave/valor
-			var p = a[i].split('=');
-	
-			// se não houver valor, ignora o parametro
-			if (p.length != 2) continue;
-	
-			// adiciona a propriedade chave ao objeto de retorno
-			// com o valor decodificado, substituindo `+` por ` `
-			// para aceitar URLs codificadas com `+` ao invés de `%20`
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		// retorna o objeto criado
-		return b;
+		window.isphone = true;
 	}
-	
-	// uso
-	var qs = GetQueryString();
-	
-	
-	$(document).ready(function(){
+					  
+	if( window.isphone )
+	{
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	else
+	{
+		onDeviceReady();
+	}
+});
+
+//Funcões e configurações
+function onDeviceReady()
+{
+    var arquivo;
+    var info
+   
+	arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
 		
-		//Funcões e configurações
-		function onDeviceReady()
-		{
-			var arquivo;
-			var info
-			
-			arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
-				
-			$.getJSON(arquivo, function(data)
-			{
-			   if(data.Aparelho != null)
-			   {
-					  for(var i in data.Aparelho)
-					  {
-							if(data.Aparelho[i].cod_user != '')
-							{
-								this.retorno += '<a href="agenda_usuario.html?cod_user=' + data.Aparelho[i].cod_user + '" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Minha Agenda</a>';
+    $.getJSON(arquivo, function(data)
+    {
+       if(data.Aparelho != null)
+       {
+              for(var i in data.Aparelho)
+              {
+                    if(data.Aparelho[i].cod_user == '')
+                    {
+                        alert('entrou');
+                    }
+              }
+        }
+    });
+}
+
+/*	this.retorno += '<a href="agenda_usuario.html?cod_user=' + data.Aparelho[i].cod_user + '" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Minha Agenda</a>';
 							}
 							
 					  }
 					  $('#resultado').html(this.retorno);
-				}
-			});
-		}
-		
-		
-/*		var arquivo = 'json/biblia/indice.json';
-		
-		$('#resultado').html('Carregando dados...');
-					  
-		var retorno;
-		var qtde;
-	   
-            // Estrutura de resultado.
-            $.getJSON(arquivo, function(data){
-                this.qtd = data.Livro.length;
-                this.retorno = '';
-    
-                for (i = 0; i < this.qtd; i++)
-                {
-					
-					this.retorno += '<a href="agenda_usuario.html" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">' + data.Livro[i].liv_nome+ '</a>';
+*/</script>
 
-                }
-                $('#resultado').html(this.retorno);
-            });
-*/	});
-	</script>
   <meta charset="utf-8">
 </head>
 
