@@ -58,22 +58,11 @@ $(document).ready(function(){
 	
 	var info
     var arquivo = 'https://portalulb.org.br/json/agenda_usuario.php?cod_user=' + qs['cod_user'];
-	alert(arquivo);
-	exit;
 	
-
-// Classe para chamar o Json.
-function json(){
-	var qtd;
-	var topo;
-	var codigo;
-	
-	codigo = qs['cod_user'];
-
-	// Resgatar valores.
-	json.prototype.resgatarValores = function(){
-
-		            // Estrutura de resultado.
+	var retorno;
+	var qtde;
+	   
+            // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
                 this.qtd = data.Calendario.length;
                 this.retorno = '';
@@ -81,37 +70,28 @@ function json(){
 				for (i = 0; i < this.qtd; i++)
                 {
 					
-                    this.topo +='<div class="activities">';
-					this.topo +='<div class="activity animated fadeinright delay-1">';
-					this.topo +='<h6>'+ data.Calendario[i].nome +'</h6>';
-					this.topo +='<p>DEPARTAMENTO: '+ data.Calendario[i].desc_depto +'</p>';
-					this.topo +='<span class="activity-time small"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Calendario[i].inicio +''; 
+                    this.retorno +='<div class="activities">';
+					this.retorno +='<div class="activity animated fadeinright delay-1">';
+					this.retorno +='<h6>'+ data.Calendario[i].nome +'</h6>';
+					this.retorno +='<p>DEPARTAMENTO: '+ data.Calendario[i].desc_depto +'</p>';
+					this.retorno +='<span class="activity-time small"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Calendario[i].inicio +''; 
 					
 					if(data.Calendario[i].fim != null)
 					{
-					this.topo += ' - ' + data.Calendario[i].fim;
+					this.retorno += ' - ' + data.Calendario[i].fim;
 					}
-					this.topo += '</span></span>';
-					this.topo += '<a href="evento.html?evento='+ data.Calendario[i].codigo +'&nome='+ data.Calendario[i].nome + '">'; 
-					this.topo +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
-					this.topo += '</a>';
-					this.topo +='</div>';
-					this.topo +='</div>';
+					this.retorno += '</span></span>';
+					this.retorno += '<a href="evento.html?evento='+ data.Calendario[i].codigo +'&nome='+ data.Calendario[i].nome + '">'; 
+					this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
+					this.retorno += '</a>';
+					this.retorno +='</div>';
+					this.retorno +='</div>';
 
                 }
 			
-                $('#resultado').html(this.topo);
+                $('#resultado').html(this.retorno);				
             });
-
-	}
-}
-
-
-// Objeto.
-var obj = new json();
-obj.resgatarValores();
-
-});
+	});
 </script>
 </head>
 
