@@ -50,7 +50,8 @@ function onDeviceReady()
     var info
    
 	arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
-		
+
+    alert(arquivo);
     $.getJSON(arquivo, function(data)
     {
        if(data.Aparelho != null)
@@ -59,7 +60,7 @@ function onDeviceReady()
               {
                     if(data.Aparelho[i].cod_user == '')
                     {
-                        alert('entrou');
+                        
                     }
               }
         }
