@@ -63,7 +63,7 @@
 			var arquivo;
 			var info
 			
-			arquivo = 'https://portalulb.org.br/json/agenda_usuario.php?id=' + device.uuid;
+			arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
 				
 			$.getJSON(arquivo, function(data)
 			{
@@ -73,7 +73,7 @@
 					  {
 							if(data.Aparelho[i].cod_user != '')
 							{
-								this.retorno += '<a href="agenda_usuario.html" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Minha Agenda</a>';
+								this.retorno += '<a href="agenda_usuario.html?cod_user=' + data.Aparelho[i].cod_user + '" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Minha Agenda</a>';
 							}
 							
 					  }
