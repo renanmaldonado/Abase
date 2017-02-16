@@ -51,22 +51,29 @@ function GetQueryString(a)
     return b;
 }
 
-//Uso
-var qs = GetQueryString();
+	// uso
+	var qs = GetQueryString();
+	
+	$(document).ready(function(){
+		
+		var info
+		var arquivo = 'https://portalulb.org.br/json/projeto.php';
+/*        var arquivo2 = "https://portalulb.org.br/json/categorias_projeto.php?projeto=" + qs['projeto'];
+        $("#ajax").load(arquivo2);
+*/
 
-$(document).ready(function(){
-	
-    var arquivo = 'https://portalulb.org.br/json/projeto.php?projeto=' + qs['projeto'];
-	
-	var retorno;
-	var qtde;
+		$('#resultado').html('Carregando dados...');
+					  
+		var retorno;
+		var qtde;
+		var codigo;
+		
+		codigos = qs['projeto'];
 	   
             // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
                 this.qtd = data.Projeto.length;
                 this.retorno = '';
-				
-				alert(data.Projeto.length);
 
 				
 				for (i = 0; i < 1; i++)
@@ -86,22 +93,22 @@ $(document).ready(function(){
 							{
 							
 							this.retorno +='<div class="collection">';
-							if(data.Projeto[i].tipo == '1')
+							if((data.Projeto[i].tipo == '1') && (data.Projeto[i].codigo == codigos))
 							{
 								this.retorno +='<a href="projeto_categoria_audio.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">AUDIO</a>';
 
 							}
-							else if(data.Projeto[i].tipo == '2')
+							else if((data.Projeto[i].tipo == '2') && (data.Projeto[i].codigo == codigos))
 							{
 								this.retorno +='<a href="projeto_categoria_texto.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">TEXTOS</a>';
 
 							}
-							else if(data.Projeto[i].tipo == '3')
+							else if((data.Projeto[i].tipo == '3') && (data.Projeto[i].codigo == codigos))
 							{
 								this.retorno +='<a href="projeto_categoria_agenda.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">AGENDA</a>';
 
 							}
-							else if(data.Projeto[i].tipo == '4')
+							else if((data.Projeto[i].tipo == '4') && (data.Projeto[i].codigo == codigos))
 							{
 								this.retorno +='<a href="projeto_categoria_arquivo.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">ARQUIVOS</a>';
 							}

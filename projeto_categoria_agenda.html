@@ -84,17 +84,13 @@
 								this.retorno +='<p>'+ data.Item[i].titulo +'</p>';
 								this.retorno +='<span class="activity-time small grey-text"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Item[i].inicio +''; 
 								
-								if(data.Item[i].fim == null || data.Item[i].fim == "0000-00-00")
+								if(data.Item[i].fim != null)
 								{
-								this.retorno += '';
-								}
-								else
-								{
-								this.retorno += ' - '+ data.Item[i].fim +'';
+								this.retorno += ' - ' + data.Item[i].fim;
 								}
 								
 								this.retorno += '</span></span>';
-								this.retorno += '<a href="evento.html?evento='+ data.Item[i].codigo +'&nome='+ data.Item[i].nome + '">'; 
+								this.retorno += '<a href="evento.html?evento='+ data.Item[i].codigo +'&nome='+ data.Item[i].titulo + '">'; 
 								this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
 								this.retorno += '</a>';
 								this.retorno +='</div>';
@@ -128,11 +124,12 @@
         
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
-        <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
+        <li><a href="filtro_agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
         <li><a href="projetos.html" class="no-child"><i class="ion-android-bulb"></i> Projetos </a></li>
         <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="acesso.html" class="no-child"><i class="ion-clipboard"></i> Acesso </a></li>
         <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
