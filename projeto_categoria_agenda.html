@@ -56,7 +56,7 @@
 	
 	$(document).ready(function(){
 		
-		var arquivo = 'https://portalulb.org.br/json/projeto_categoria_agenda.php';
+		var arquivo = 'https://portalulb.org.br/json/projeto_categoria_agenda.php?projeto='+ qs['projeto'];
 		
 		$('#resultado').html('Carregando dados...');
 					  
@@ -66,6 +66,7 @@
 		
 		codigos = qs['categoria'];
 		tipo = qs['tipo'];
+		proj = qs['projeto'];
 	   
             // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
@@ -78,10 +79,15 @@
 						if(data.Item[i].codigo == codigos)
 						{
 							this.retorno +='<div class="activities">';
+							this.retorno +='<div class="p-20 center">';
+							this.retorno +='<h4 class="m-0">AGENDA DO PROJETO '+ data.Item[i].nome_proj +'</h4>';
+							this.retorno +='</div>';
+
 							for (i = 0; i < this.qtd; i++)
 							{
 								this.retorno +='<div class="activity animated fadeinright delay-1">';
-								this.retorno +='<p>'+ data.Item[i].titulo +'</p>';
+								this.retorno +='<h6>'+ data.Item[i].titulo +'</h6>';
+								this.retorno +='<p>DEPARTAMENTO: '+ data.Item[i].desc_depto +'</p>';
 								this.retorno +='<span class="activity-time small grey-text"><i class="ion-calendar"></i> <span style="font-size:12px;">'+ data.Item[i].inicio +''; 
 								
 								if(data.Item[i].fim != null)
@@ -90,7 +96,7 @@
 								}
 								
 								this.retorno += '</span></span>';
-								this.retorno += '<a href="evento.html?evento='+ data.Item[i].codigo +'&nome='+ data.Item[i].titulo + '">'; 
+								this.retorno += '<a href="evento.html?evento='+ data.Item[i].evento +'&nome='+ data.Item[i].titulo + '">'; 
 								this.retorno +='<span class="activity-type"><i class="ion-ios-arrow-forward"></i></span>';
 								this.retorno += '</a>';
 								this.retorno +='</div>';
@@ -148,13 +154,8 @@
       
       <!-- Page Contents -->
       <div class="page animated fadeinright">
-
+     
         <div class="divider"></div>
-
-        <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="projetos.html"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-        </div>
 
         <div id="resultado" align="justify" style="text-align: justify; white-space: pre-wrap;"></div>
         

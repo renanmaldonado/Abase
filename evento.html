@@ -78,13 +78,16 @@
 							this.retorno +='<div class="activities">';
 							this.retorno +='<div class="activity animated fadeinright delay-1">';
 							this.retorno +='<h2 class="title">'+ data.Calendario[i].nome +'</h2>';
-							this.retorno +='<span class="activity-time small grey-text"><span style="font-size:12px;">Data do evento: '+ data.Calendario[i].inicio;
+							this.retorno +='<span style="font-size:14px;">Data do evento: '+ data.Calendario[i].inicio;
 							if(data.Calendario[i].fim != null)
 							{
-							this.retorno +=' - '+ data.Calendario[i].fim +'</span></span>';
+							this.retorno +=' - '+ data.Calendario[i].fim +'</span>';
 							}
 							this.retorno +='<br>';
+							if(data.Calendario[i].descricao != null)
+							{
 							this.retorno +='<p>'+ data.Calendario[i].descricao +'</p>';
+							}
 							this.retorno +='</div>';
 							this.retorno +='</div>';
 

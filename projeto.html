@@ -51,16 +51,13 @@ function GetQueryString(a)
     return b;
 }
 
-	// uso
-	var qs = GetQueryString();
+//Uso
+var qs = GetQueryString();
+
+$(document).ready(function(){
 	
-	$(document).ready(function(){
-		
-		var info
-		var arquivo = 'https://portalulb.org.br/json/projeto.php';
-/*        var arquivo2 = "https://portalulb.org.br/json/categorias_projeto.php?projeto=" + qs['projeto'];
-        $("#ajax").load(arquivo2);
-*/
+	var info
+	var arquivo = 'https://portalulb.org.br/json/projeto.php?projeto=' + qs['projeto'];
 
 		$('#resultado').html('Carregando dados...');
 					  
@@ -74,8 +71,8 @@ function GetQueryString(a)
             $.getJSON(arquivo, function(data){
                 this.qtd = data.Projeto.length;
                 this.retorno = '';
-
 				
+		
 				for (i = 0; i < 1; i++)
 				{
 						
@@ -95,22 +92,22 @@ function GetQueryString(a)
 							this.retorno +='<div class="collection">';
 							if((data.Projeto[i].tipo == '1') && (data.Projeto[i].codigo == codigos))
 							{
-								this.retorno +='<a href="projeto_categoria_audio.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">AUDIO</a>';
+								this.retorno +='<a href="projeto_categoria_audio.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'&projeto='+ data.Projeto[i].codigo +'" class="collection-item" style="color:#1C212A;">AUDIO</a>';
 
 							}
 							else if((data.Projeto[i].tipo == '2') && (data.Projeto[i].codigo == codigos))
 							{
-								this.retorno +='<a href="projeto_categoria_texto.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">TEXTOS</a>';
+								this.retorno +='<a href="projeto_categoria_texto.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'&projeto='+ data.Projeto[i].codigo +'" class="collection-item" style="color:#1C212A;">TEXTOS</a>';
 
 							}
 							else if((data.Projeto[i].tipo == '3') && (data.Projeto[i].codigo == codigos))
 							{
-								this.retorno +='<a href="projeto_categoria_agenda.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">AGENDA</a>';
+								this.retorno +='<a href="projeto_categoria_agenda.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'&projeto='+ data.Projeto[i].codigo +'" class="collection-item" style="color:#1C212A;">AGENDA</a>';
 
 							}
 							else if((data.Projeto[i].tipo == '4') && (data.Projeto[i].codigo == codigos))
 							{
-								this.retorno +='<a href="projeto_categoria_arquivo.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">ARQUIVOS</a>';
+								this.retorno +='<a href="projeto_categoria_arquivo.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'&projeto='+ data.Projeto[i].codigo +'" class="collection-item" style="color:#1C212A;">ARQUIVOS</a>';
 							}
 							this.retorno +='</div>';
             
@@ -171,11 +168,6 @@ function GetQueryString(a)
       <div class="page animated fadeinright">
 
         <div class="divider"></div>
-
-        <div class="valign center-align w-100">
-            <a class="btn-large espaco" href="projetos.html"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a class="btn-large espaco" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-        </div>
 
         <div id="resultado" align="justify" style="text-align: justify; white-space: pre-wrap;"></div>
         
