@@ -22,90 +22,6 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-    <script>
-	$(document).ready(function()
-	{
-		//Se esta rodando no App ou no Browser
-		window.isphone = false;
-		
-		if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
-		{
-			window.isphone = true;
-		}
-						  
-		if( window.isphone )
-		{
-			document.addEventListener("deviceready", onDeviceReady, false);
-		}
-		else
-		{
-			onDeviceReady();
-		}
-	});
-	
-	//Funcões e configurações
-	function onDeviceReady()
-	{
-		var info
-		var networkState = navigator.connection.type;
-		var states = {};
-		states[Connection.UNKNOWN]  = 'Desconhecida';
-		states[Connection.ETHERNET] = 'Ethernet';
-		states[Connection.WIFI]     = 'Wi-Fi';
-		states[Connection.CELL_2G]  = '2G';
-		states[Connection.CELL_3G]  = '3G';
-		states[Connection.CELL_4G]  = '4G';
-		states[Connection.CELL]     = 'Genérica';
-		states[Connection.NONE]     = 'Sem conexão';
-		
-		info = '<strong>Dados técnicos</strong>';
-		info += '<br>';
-		info += '<strong>Versão da plataforma de desenvolvimento</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += device.cordova;
-		info += '</span>';
-		info += '<br>';
-		info += '<strong>Modelo do Device</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += device.model;
-		info += '</span>';
-		info += '<br>';
-		info += '<strong>Sistema Operacional</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += device.platform;
-		info += '</span>';
-		info += '<br>';
-		info += '<strong>Versão do Sistema Operacional</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += device.version;
-		info += '</span>';
-		info += '<br>';
-		info += '<strong>Identificador Universal</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += device.uuid;
-		info += '</span>';
-		info += '<br>';
-		info += '<strong>Fabricante</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += device.manufacturer;
-		info += '</span>';
-		info += '<br>';
-		info += '<strong>Conexão atual</strong>';
-		info += '<br>';
-		info += '<span class="activity-time small grey-text" style="font-size:12px;">';
-		info += states[networkState];
-		info += '</span>';
-		
-		document.getElementById("informacoes").innerHTML = info;
-	}
-	</script>
-
   <meta charset="utf-8">
 </head>
 
@@ -129,11 +45,12 @@
         
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
-        <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
+        <li><a href="filtro_agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
         <li><a href="projetos.html" class="no-child"><i class="ion-android-bulb"></i> Projetos </a></li>
-        <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
+        <li><a href="video.html" class="no-child"><i class="ion-android-phone-portrait"></i> Canal de Vídeos</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="acesso.html" class="no-child"><i class="ion-clipboard"></i> Acesso </a></li>
         <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->
@@ -149,43 +66,36 @@
         </div>
       </div>
       <!-- End of Toolbar -->
+
       
       <!-- Page Contents -->
       <div class="page animated fadeinright">
         
         <div class="divider"></div>
-        
+
         <div class="p-20 center">
-            <i class="ion-android-settings"></i>
-            <h4 class="m-0" style="text-transform:uppercase">SOBRE</h4>
+            <i class="ion-information-circled"></i>
+            <h4 class="m-0">Saiba Mais</h4>
         </div>
 
+       
         <div class="divider"></div>
+          
+        <a href="sobre_adventistas.html" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Os Adventistas</a>
+        <a href="sobre_sedes.html" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Sedes Regionais ULB</a>
+		<a href="sobre_app.html" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">Sobre o APP</a>
 
-        <center>
-        <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
-        </center>
-        
+
+
         <div class="divider"></div>
         
-        <div class="activities">
-            <div class="activity animated fadeinright delay-1">
-                <h4 class="title" align="center">União Leste da <br>Igreja Adventista do Sétimo Dia</h4>
-                <br>
-                <p align="justify"><span class="activity-time small grey-text" style="font-size:12px;">Este App foi desenvolvido pela RDORVAL SOLUÇÕES EM TECNOLOGIA e sua propriedade e direitos pertencem a União Leste da Igreja Adventista do Sétimo Dia.</span></p>
-                <br>
-                <p align="justify"><span class="activity-time small grey-text" style="font-size:12px;">Copyright© 2016. Todos os direitos reservados. Todos os textos, imagens, gráficos, animações, vídeos, músicas, sons e outros materiais deste App são protegidos por direitos autorais e outros direitos de propriedade intelectual pertencentes à União Leste da Igreja Adventista do Sétimo Dia.</span></p>
-               <p align="center" id="informacoes"></p>
-            </div>
+        <div class="valign center-align">
+            <a class="btn-large" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
         </div>
-
-        <div class="divider"></div>
-
-        <center>
-        <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
-        </center>
         
         <div class="divider"></div>
+        <div class="divider"></div>
+
 
       </div> 
       <!-- End of Page Contents -->

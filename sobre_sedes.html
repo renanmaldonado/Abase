@@ -22,45 +22,7 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-    <script>
-		function GetQueryString(a)
-	{
-		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
-	
-		if (typeof a === "string")
-			a = a.split("#").join("&").split("&");
-	
-		// se não há valores, retorna um objeto vazio
-		if (!a) return {};
-	
-		var b = {};
-		for (var i = 0; i < a.length; ++i)
-		{
-			// obtem array com chave/valor
-			var p = a[i].split('=');
-	
-			// se não houver valor, ignora o parametro
-			if (p.length != 2) continue;
-	
-			// adiciona a propriedade chave ao objeto de retorno
-			// com o valor decodificado, substituindo `+` por ` `
-			// para aceitar URLs codificadas com `+` ao invés de `%20`
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		// retorna o objeto criado
-		return b;
-	}
-
-	var qs = GetQueryString();
-
-	$(document).ready(function(){
-	
-    var arquivo2 = "https://portalulb.org.br/json/combo_igrejas.php?codigo=" + qs['codigo'];
-    $("#cod_igreja").load(arquivo2);
-    $("#cod_depto").load("https://portalulb.org.br/json/deptos.php");
-	
-	});
-	</script>
+  <meta charset="utf-8">
 </head>
 
   <body>
@@ -107,56 +69,74 @@
       
       <!-- Page Contents -->
       <div class="page animated fadeinright">
-
-        <!-- Form Inputs --> 
-        <div class="form-inputs p-20">
-
-          <h4 class="center">Preencha o Formulário</h4>
-          <div>
-            <form name="cadastro" action="insere_cadastro.html" method="get">
-            <div>
-                <p>Selecione sua Igreja</p>
-                <select id="cod_igreja" name="cod_igreja" class="browser-default">
-                <option value="0">Carregando...</option>
-                </select>
-            </div>
-            <div class="divider"></div>
-            <div class="input-field animated fadeinright">
-              <i class="ion-ios-person-outline prefix"></i>
-              <input id="nome_user" type="text" name="nome_user" class="validate" placeholder="Digite seu Nome" value="" required>
-            </div>
-          <div class="input-field animated fadeinright delay-2">
-            <i class="ion-ios-email-outline prefix"></i>
-            <input id="email" type="email" name="email" class="validate" placeholder="Digite seu Email" value="" required>
-          </div>
-          <div class="input-field animated fadeinright delay-3">
-            <i class="ion-ios-telephone-outline prefix"></i>
-            <input id="celular" type="text" name="celular" class="validate" placeholder="Digite seu Celular com DDD" value="" maxlength="12" required>
-          </div>
-          <div>
-          <div class="divider"></div>
-          <div id="cod_depto"></div>
-          <div class="divider"></div>
-
-           <div style="text-align:center;">
-          <script>
-			function Cancela() {
-				window.location.assign("index.html")
-			}
-			</script>
-           <input name="submit" type="submit" value="Cadastrar" class="waves-light btn-large primary-color bouncein delay-6" >
-           <input name="submit2" type="button" value="Cancelar" class="waves-light btn-large primary-color bouncein delay-6" onclick="Cancela()" >
-		   </div>
-        </div>
-        <!-- End of Form -->
-        </form> 
-
         
+        <div class="divider"></div>
+        
+        <div class="activities">
+            <div class="activity animated fadeinright delay-1">
+                <h4 class="title" align="center">Sedes Regionais ULB</h4>
+                <br>
+                <p align="justify">
+                <b>Associação Bahia</b><br>
+                Rua Arquimedes Gonçalves, 28<br>
+                Jardim Baiano<br>
+                CEP: 40050-300<br>
+                Salvador - BA<br>
+                </p>
+                <br>
+                <p align="justify">
+                <b>Associação Bahia Central</b><br>
+                Rua General Mourão Filho, 19<br>
+                CEP:<br>
+                Feira de Santana - BA<br>
+                </p>
+                <br>
+                <p align="justify">
+                <b>Associação Bahia Sul</b><br>
+                Rua Almirante Tamandaré, 749<br>
+                Centro<br>
+                CEP: 45600-128<br>
+                Itabuna - BA<br>
+                </p>
+                <br>
+                <p align="justify">
+                <b>Missão Bahia Norte</b><br>
+                Rua Imaculada Conceição, 252<br>
+                Piranga<br>
+                CEP: 48900-120<br>
+                Juazeiro - BA<br>
+                </p>
+                <br>
+                <p align="justify">
+                <b>Missão Bahia Sudoeste</b><br>
+                Avenida Juracy Magalhães, 3110<br>
+                Morada do Pássaro<br>
+                CEP: 45023-490<br>
+                Vitória da Conquista - BA<br>
+                </p>
+                <br>
+                <p align="justify">
+                <b>Missão Sergipe</b><br>
+                Rua Jorge Pereira Porto, 200<br>
+                Salgado Filho<br>
+                CEP: 49020-140<br>
+                Aracaju - SE<br>
+                </p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <center>
+        <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
+        </center>
+        
+        <div class="divider"></div>
+
       </div> 
       <!-- End of Page Contents -->
 
     </div><!-- End of Main Container -->
-    
     
     <script src="js/jquery.swipebox.min.js"></script>   
     <script src="js/jquery.smoothState.min.js"></script> 

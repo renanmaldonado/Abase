@@ -23,54 +23,51 @@
         app.initialize();
     </script>
     <script>
-	function GetQueryString(a)
-	{
-		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+function GetQueryString(a)
+{
+    a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
+
+    if (typeof a === "string")
+        a = a.split("#").join("&").split("&");
+
+    // se não há valores, retorna um objeto vazio
+    if (!a) return {};
+
+    var b = {};
+    for (var i = 0; i < a.length; ++i)
+    {
+        // obtem array com chave/valor
+        var p = a[i].split('=');
+
+        // se não houver valor, ignora o parametro
+        if (p.length != 2) continue;
+
+        // adiciona a propriedade chave ao objeto de retorno
+        // com o valor decodificado, substituindo `+` por ` `
+        // para aceitar URLs codificadas com `+` ao invés de `%20`
+        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    // retorna o objeto criado
+    return b;
+}
+
+//Uso
+var qs = GetQueryString();
+
+$(document).ready(function(){
 	
-		if (typeof a === "string")
-			a = a.split("#").join("&").split("&");
+    var arquivo = 'https://portalulb.org.br/json/projeto.php?projeto=' + qs['projeto'];
 	
-		// se não há valores, retorna um objeto vazio
-		if (!a) return {};
-	
-		var b = {};
-		for (var i = 0; i < a.length; ++i)
-		{
-			// obtem array com chave/valor
-			var p = a[i].split('=');
-	
-			// se não houver valor, ignora o parametro
-			if (p.length != 2) continue;
-	
-			// adiciona a propriedade chave ao objeto de retorno
-			// com o valor decodificado, substituindo `+` por ` `
-			// para aceitar URLs codificadas com `+` ao invés de `%20`
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		// retorna o objeto criado
-		return b;
-	}
-	
-	// uso
-	var qs = GetQueryString();
-	
-	$(document).ready(function(){
-		
-		var arquivo = 'https://portalulb.org.br/json/projeto.php';
-		
-		$('#resultado').html('Carregando dados...');
-					  
-		var retorno;
-		var qtde;
-		var codigo;
-		
-		codigos = qs['projeto'];
+	var retorno;
+	var qtde;
 	   
             // Estrutura de resultado.
             $.getJSON(arquivo, function(data){
                 this.qtd = data.Projeto.length;
-				this.retorno = '';
-	
+                this.retorno = '';
+				
+				alert(data.Projeto.length);
+
 				
 				for (i = 0; i < 1; i++)
 				{
@@ -84,28 +81,29 @@
 							this.retorno +='<h2>'+ data.Projeto[i].nome +'</h2>';
 							this.retorno +='<p>'+ data.Projeto[i].descricao +'</p>';
 							this.retorno +='</div>';
+							
 							for (i = 0; i < this.qtd; i++)
 							{
 							
 							this.retorno +='<div class="collection">';
 							if(data.Projeto[i].tipo == '1')
 							{
-								this.retorno +='<a href="projeto_categoria_audio.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
+								this.retorno +='<a href="projeto_categoria_audio.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">AUDIO</a>';
 
 							}
 							else if(data.Projeto[i].tipo == '2')
 							{
-								this.retorno +='<a href="projeto_categoria_texto.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
+								this.retorno +='<a href="projeto_categoria_texto.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">TEXTOS</a>';
 
 							}
 							else if(data.Projeto[i].tipo == '3')
 							{
-								this.retorno +='<a href="projeto_categoria_agenda.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
+								this.retorno +='<a href="projeto_categoria_agenda.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">AGENDA</a>';
 
 							}
 							else if(data.Projeto[i].tipo == '4')
 							{
-								this.retorno +='<a href="projeto_categoria_arquivo.html?categoria='+ data.Projeto[i].cat +'&nome='+ data.Projeto[i].categoria + '&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">'+ data.Projeto[i].categoria +'</a>';
+								this.retorno +='<a href="projeto_categoria_arquivo.html?categoria='+ data.Projeto[i].cat +'&tipo='+ data.Projeto[i].tipo +'" class="collection-item" style="color:#1C212A;">ARQUIVOS</a>';
 							}
 							this.retorno +='</div>';
             
@@ -117,7 +115,7 @@
 				$('#resultado').html(this.retorno);
             });
 	});
-	</script>
+</script>
 </head>
 
   <body>
@@ -140,11 +138,12 @@
         
         <!-- Menu -->
         <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
-        <li><a href="agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
+        <li><a href="filtro_agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
         <li><a href="projetos.html" class="no-child"><i class="ion-android-bulb"></i> Projetos </a></li>
-        <li><a href="midias.html" class="no-child"><i class="ion-android-phone-portrait"></i> Midias</a> </li>
+        <li><a href="video.html" class="no-child"><i class="ion-android-phone-portrait"></i> Canal de Vídeos</a> </li>
         <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
         <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
+        <li><a href="acesso.html" class="no-child"><i class="ion-clipboard"></i> Acesso </a></li>
         <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
       </ul>
       <!-- End of Sidebars -->

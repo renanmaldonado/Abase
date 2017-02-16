@@ -22,65 +22,23 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-    <script>
-	function GetQueryString(a)
-	{
-		a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
-	
-		if (typeof a === "string")
-			a = a.split("#").join("&").split("&");
-	
-		// se não há valores, retorna um objeto vazio
-		if (!a) return {};
-	
-		var b = {};
-		for (var i = 0; i < a.length; ++i)
-		{
-			// obtem array com chave/valor
-			var p = a[i].split('=');
-	
-			// se não houver valor, ignora o parametro
-			if (p.length != 2) continue;
-	
-			// adiciona a propriedade chave ao objeto de retorno
-			// com o valor decodificado, substituindo `+` por ` `
-			// para aceitar URLs codificadas com `+` ao invés de `%20`
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		// retorna o objeto criado
-		return b;
+    <style>
+	.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px; height: 0; overflow: hidden;
 	}
-	
-	// uso
-	var qs = GetQueryString();
-	
-	
-	$(document).ready(function(){
-		
-		var arquivo = 'https://portalulb.org.br/json/campos.php';
-		
-		$('#resultado').html('Carregando dados...');
-					  
-		var retorno;
-		var qtde;
-	   
-            // Estrutura de resultado.
-            $.getJSON(arquivo, function(data){
-                this.qtd = data.Campos.length;
-                this.retorno = '';
-				
-    
-                for (i = 0; i < this.qtd; i++)
-                {
-					this.retorno +='<a href="agenda.html?codigo='+ data.Campos[i].cod +'&nome='+ data.Campos[i].nome + '" class="waves-effect waves-light btn-large primary-color block animated bouncein delay-4" style="margin:10px;">'+ data.Campos[i].nome + '</a>';
-
-                }
-			
-                $('#resultado').html(this.retorno);
-            });
-	});
-	</script>
-
+	 
+	.video-container iframe,
+	.video-container object,
+	.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	}
+	</style>
   <meta charset="utf-8">
 </head>
 
@@ -125,33 +83,49 @@
         </div>
       </div>
       <!-- End of Toolbar -->
-
       
       <!-- Page Contents -->
       <div class="page animated fadeinright">
         
         <div class="divider"></div>
+        
+        <div class="divider"></div>
 
-        <div class="p-20 center">
-            <i class="ion-android-calendar"></i>
-            <h4 class="m-0">AGENDA</h4>
-            <p class="text-flow m-0">Confira os próximos eventos</p>
+        <div class="activities">
+            <div class="activity animated fadeinright delay-1">
+                <h4 class="title" align="center">Os Adventistas</h4>
+                <br>
+                <p align="justify">Os adventistas do sétimo dia, com mais de 17 milhões de membros no mundo, são uma igreja cristã protestante organizada em 1863 nos Estados Unidos. Sua origem ocorre logo depois do movimento liderado por Guilherme Miller que ressaltou a necessidade de maior ênfase na pregação sobre a breve volta de Jesus Cristo a esse mundo.</p>
+    			<p align="justify">A sede sul-americana da Igreja Adventista do Sétimo Dia, responsável pela coordenação administrativa em oito países, registra mais de dois milhões de membros.</p>
+                <br>
+    			<h5 class="title">Missão</h5>
+    			<p align="justify">Fazer discípulos de todas as nações, comunicando o evangelho eterno no contexto da tríplice mensagem angélica de Apocalipse 14:6-12, convidando-as a aceitar a Jesus como Seu salvador pessoal e unir-se a Sua igreja remanescente, instruindo-as para servi-Lo como Senhor e preparando-as para Sua breve volta.</p>
+                <br>
+			    <h5 class="title">Visão</h5>
+			    <p align="justify">Em harmonia com as grandes profecias das Escrituras, entendemos que o clímax do plano de Deus é restaurar toda a Sua criação à completa harmonia com Sua perfeita vontade e justiça.</p>
+               <br>
+                <h5 class="title">Estilo de vida</h5>
+    			<p align="justify">Os adventistas crêem em uma vida integralmente dedicada a Deus nos aspectos físico, psicológico, emocional e espiritual. Ensinam a respeito desse estilo com base em oito remédios divinos que são água, alimentação saudável, ar puro, luz solar, exercício físico, temperança, repouso e confiança em Deus.</p>
+   				<p align="justify">Os adventistas possuem um estilo de vida que envolve o descanso semanal no sábado, dia separado por Deus para um relacionamento maior com Suas criaturas.</p>
+    			<p align="justify">Confiam que Deus age em todas as áreas de sua vida e que Cristo voltará logo para dar a recompensa a todos, justos e injustos.</p>
+                 <br>
+   				 <h5 class="title">Comunhão com Deus</h5>
+    			 <p align="justify">Os adventistas enfatizam a comunhão com Deus através da oração, do estudo da Bíblia e do testemunho.</p>
+    			 <p align="justify">A oração envolve a busca da presença de Deus nas primeiras horas de cada dia. O estudo da Bíblia é ressaltado como uma maneira de ouvir as orientações divinas diariamente. O testemunho é compreendido como resultado natural dessa comunhão mantida como um hábito na vida dos que creem.</p>                
+                 <br>
+  				 <h5 class="title">Vídeo Institucional</h5>
+                 <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/Cei3AN_GP9Q" frameborder="0" allowfullscreen></iframe></div>
+                <br>
+            </div>
         </div>
 
-       
-        <div class="divider"></div>
-          
-        <div id="resultado"></div>
-        
-        <div class="divider"></div>
-        
-        <div class="valign center-align">
-            <a class="btn-large" href="index.html"><i class="ion-ios-home icone"></i>Início</a>
-        </div>
-        
-        <div class="divider"></div>
         <div class="divider"></div>
 
+        <center>
+        <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
+        </center>
+        
+        <div class="divider"></div>
 
       </div> 
       <!-- End of Page Contents -->
