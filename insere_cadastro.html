@@ -57,28 +57,6 @@
         }
     
     var qs = GetQueryString();
-	
-    
-    if(qs['cod_igreja'] == "")
-    {
-        window.location.href='mensagem.html?txt=Você precisa selecionar a igreja, por favor!';
-        exit;
-    }
-    else if(qs['nome_user'] == "")
-    {
-        window.location.href='mensagem.html?txt=Você precisa preencher o Nome completo, por favor!';
-        exit;
-    }
-    else if(qs['email'] == "")
-    {
-        window.location.href='mensagem.html?txt=Você precisa preencher o campo E-mail, por favor!';
-        exit;
-    }
-	else if(qs['celular'] == "")
-	{
-		window.location.href='mensagem.html?txt=Você precisa preencher o campo Celular, por favor!';
-		exit;
-	}
 
 	$(document).ready(function()
 	{
@@ -101,38 +79,11 @@
 	});
 	
 	//Funcões e configurações
-
 	function onDeviceReady()
 	{
 		
 	 var arquivo;
      var info
-
-		
-/*		//Sem conexão
-		if(networkState == 'none')
-		{
-			window.location.href='conexao.html?status=Sem conexão';
-			exit;
-		}
-		//Conexão desconhecida
-		else if(networkState == 'unknown')
-		{
-			window.location.href='conexao.html?status=Conexão desconhecida';
-			exit;
-		}
-		//Conexão genérica
-		else if(networkState == 'cell')
-		{
-			window.location.href='conexao.html?status=Conexão génerica ou desconhecida';
-			exit;
-		}
-		//Conexão 2G
-		else if(networkState == 'cell_2g')
-		{
-			window.location.href='conexao.html?status=Conexão insuficiente (2G)';
-			exit;
-		}*/
 		
 		arquivo = 'https://portalulb.org.br/json/cadastro_usuario.php?id=' + device.uuid + '&' + window.location.search.substr(1);
 		

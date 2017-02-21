@@ -48,35 +48,7 @@ function onDeviceReady()
 {
     var arquivo;
     var info
- 
-/*    var networkState = navigator.connection.type;
-*/    
-/*    //Sem conexão
-    if(networkState == 'none')
-    {
-        window.location.href='conexao.html?status=Sem conexão';
-        exit;
-    }
-    //Conexão desconhecida
-    else if(networkState == 'unknown')
-    {
-        window.location.href='conexao.html?status=Conexão desconhecida';
-        exit;
-    }
-    //Conexão genérica
-    else if(networkState == 'cell')
-    {
-        window.location.href='conexao.html?status=Conexão génerica ou desconhecida';
-        exit;
-    }
-    //Conexão 2G
-    else if(networkState == 'cell_2g')
-    {
-        window.location.href='conexao.html?status=Conexão insuficiente (2G)';
-        exit;
-    }
-*/    
-    
+   
 	arquivo = 'https://portalulb.org.br/json/valida_acesso.php?id=' + device.uuid;
 		
     $.getJSON(arquivo, function(data)
