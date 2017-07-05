@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <!-- Title -->
-        <title>APP AMA</title>
+        <title>APP DA AMA</title>
         
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <meta charset="UTF-8">
@@ -21,8 +22,8 @@
         <link href="assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css"/>	
         <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>	
-        <link href="assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/plugins/gridgallery/css/component.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/>	
+        <link href="assets/plugins/vertical-timeline/css/style.css" rel="stylesheet" type="text/css">
         
         <!-- Theme Styles -->
         <link href="assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
@@ -31,6 +32,7 @@
         
         <script src="assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
         <script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+
         <script src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
         <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 
@@ -39,7 +41,7 @@
         <script type="text/javascript">
             app.initialize();
         </script>
-		<script>
+        <script>
         function GetQueryString(a)
         {
             a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
@@ -71,98 +73,50 @@
         // uso
         var qs = GetQueryString();
         
+        
         $(document).ready(function(){
             
-            var arquivo = 'json/biblia/' + qs['livro'] + '.json';
-            var voltar;
+            var arquivo = "http://apps.unb.org.br/sistema/json/agenda_campo.php?codigo=" + qs['codigo'];
             
-            //tipo = 1 - Texto do ano biblico na Bíblia
-            if(qs['tipo'] == 1)
-            {
-                voltar = '<a href="biblia_livro.html?';
-                voltar += 'livro=' + qs['livro'];
-                voltar += '&titulo=' + qs['titulo'];
-                voltar += '&total=' + qs['total'];
-                voltar += '" class="btn-large espaco"><i class="ion-arrow-left-a icone"></i>Voltar</a>';
-                voltar += '<a href="biblia.html" class="btn-large"><i class="ion-ios-bookmarks icone"></i>Livros</a>';
-                
-                
-                //Navegação entre capitulos
-                document.getElementById("navegacao").innerHTML = '';
-                if(parseInt(qs['capitulo']) > 1)
-                {
-                    var retroceder;
-                    var anterior;
-                    
-                    retroceder = parseInt(qs['capitulo']) - 1;
-                    
-                    anterior = '<a href="biblia_capitulo.html?'; 
-                    anterior += 'livro=' + qs['livro'];
-                    anterior += '&titulo=' + qs['titulo'];
-                    anterior += '&capitulo=' + retroceder;
-                    anterior += '&total=' + qs['total'];
-                    anterior += '&tipo=1" class="btn btn-info" style="margin:2px;"> Anterior</a>';
-                    document.getElementById("navegacao").innerHTML += anterior;
-                }
-                if(parseInt(qs['capitulo']) < parseInt(qs['total']))
-                {
-                    var avancar;
-                    var proximo;
-                    
-                    proximo = parseInt(qs['capitulo']) + 1;
-                    avancar = '<a href="biblia_capitulo.html?'; 
-                    avancar += 'livro=' + qs['livro'];
-                    avancar += '&titulo=' + qs['titulo'];
-                    avancar += '&capitulo=' + proximo;
-                    avancar += '&total=' + qs['total'];
-                    avancar += '&tipo=1" class="btn btn-info" style="margin:2px;">Próximo </a>';
-                    
-                    document.getElementById("navegacao").innerHTML += avancar;
-                }
-                //Fim da navegação entre capitulos
-            }
-            
-            
-            document.getElementById("titulo").innerHTML = qs['titulo'] + ' - Capítulo ' + qs['capitulo'];
-            
-            
-        // Classe para chamar o Json.
-        function json(){
-            var qtd;
+            $('#resultado').html('Carregando dados...');
+                          
             var retorno;
-            var capitulos;
-            
-            livros = qs['livro'];
-            capitulos = qs['capitulo'];
-        
-            // Resgatar valores.
-                $('#texto').html('Carregando dados...');
-        
+            var qtde;
+           
                 // Estrutura de resultado.
                 $.getJSON(arquivo, function(data){
-                    this.qtd = data.Livro.length;
+                    this.qtd = data.Calendario.length;
                     this.retorno = '';
-        
+                    
                     for (i = 0; i < this.qtd; i++)
                     {
-                            if(data.Livro[i].capitulo == capitulos)
-                            {
-                                this.retorno += '<strong>';
-                                this.retorno += data.Livro[i].verso;
-                                this.retorno += '</strong>';
-                                this.retorno += ' - ';
-                                this.retorno += data.Livro[i].texto;
-                                this.retorno += '<br>';
-                            }
+                        
+			
+						this.retorno +='<div class="cd-timeline-block">';
+						this.retorno +='<div class="cd-timeline-img cd-success">';
+						this.retorno +='<i class="fa fa-calendar"></i>';
+						this.retorno +='</div>';
+						
+						this.retorno +='<div class="cd-timeline-content">';
+						this.retorno +='<h2>'+ data.Calendario[i].nome +'</h2>';
+						this.retorno +='<p>DEPARTAMENTO: '+ data.Calendario[i].nome_depto +' <br>';
+						if(data.Calendario[i].descricao != null)
+                        {
+						this.retorno +=' '+ data.Calendario[i].descricao + '</p>';
+						}
+						this.retorno +='<span class="cd-date">'+ data.Calendario[i].inicio +'';
+						if(data.Calendario[i].fim != null)
+                        {
+                        this.retorno += ' - ' + data.Calendario[i].fim;
+                        }
+						this.retorno +='</span>';
+						this.retorno +='</div>';
+						this.retorno +='</div>';
+    
                     }
-                    $('#texto').html(this.retorno);
+                
+                    $('#resultado').html(this.retorno);
                 });
-        }
-        
-        // Objeto.
-        var obj = new json();
-        obj.resgatarValores();
-        
         });
         </script>
 
@@ -176,7 +130,7 @@
     </head>
     <body class="page-header-fixed">
         <main class="page-content content-wrap">
-                        <div class="navbar">
+            <div class="navbar">
                 <div class="navbar-inner">
                     <div class="sidebar-pusher">
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
@@ -216,52 +170,47 @@
                 </div><!-- Page Sidebar Inner -->
             </div><!-- Page Sidebar -->
             <div class="page-inner">
-            	<div class="page-title">
-                    <h3 id="titulo"></h3>
+                <div class="page-title">
+                    <h3>Agenda de Eventos</h3>
                     <div class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li>Texto na Nova Versão Internacional</li>
+                            <li>Associação Maranhense</li>
                         </ol>
                     </div>
-                    <br>
-		            <div id="navegacao"></div>
                 </div>
                 <div id="main-wrapper">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="panel panel-white">
-                                <div class="panel-body">
-								 
-                                <p class="container" id="texto" align="justify" style="text-align: justify; white-space: pre-wrap;"></p>
+                        <div class="col-md-12">
+                            <section id="cd-timeline" class="cd-container">
+                                
+                             <div id="resultado"></div>
 
-                                </div>
-                            </div>
+                        
+                            </section> <!-- cd-timeline -->
                         </div>
                     </div><!-- Row -->
                 </div><!-- Main Wrapper -->
-               <div class="page-footer">
+                <div class="page-footer">
                     <p align="left">Associação Maranhense da Igreja Adventista do Sétimo Dia</p>
                 </div>
             </div><!-- Page Inner -->
         </main><!-- Page Content -->
+        	
 
         <!-- Javascripts -->
-        <script src="assets/plugins/pace-master/pace.min.js"></script>
-        <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="assets/plugins/switchery/switchery.min.js"></script>
-        <script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
-        <script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
-        <script src="assets/plugins/offcanvasmenueffects/js/main.js"></script>
-        <script src="assets/plugins/waves/waves.min.js"></script>
-        <script src="assets/plugins/3d-bold-navigation/js/main.js"></script>		
-        <script src="assets/plugins/gridgallery/js/imagesloaded.pkgd.min.js"></script>
-		<script src="assets/plugins/gridgallery/js/masonry.pkgd.min.js"></script>
-		<script src="assets/plugins/gridgallery/js/classie.js"></script>
-		<script src="assets/plugins/gridgallery/js/cbpgridgallery.js"></script>
-        <script src="assets/js/modern.min.js"></script>
-        <script src="assets/js/pages/gallery.js"></script>
+	<script src="assets/plugins/pace-master/pace.min.js"></script>
+    <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/plugins/switchery/switchery.min.js"></script>
+    <script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
+    <script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+    <script src="assets/plugins/offcanvasmenueffects/js/main.js"></script>
+    <script src="assets/plugins/waves/waves.min.js"></script>
+    <script src="assets/plugins/3d-bold-navigation/js/main.js"></script>
+    <script src="assets/plugins/vertical-timeline/js/main.js"></script>
+    <script src="assets/js/modern.min.js"></script>
+    <script src="assets/js/pages/timeline.js"></script>
         
     </body>
 </html>

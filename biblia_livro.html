@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ABASE</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <head>
+        <!-- Title -->
+        <title>APP AMA</title>
+        
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta charset="UTF-8">
+        <meta name="description" content="Admin Dashboard Template" />
+        <meta name="keywords" content="admin,dashboard" />
+        <meta name="author" content="Steelcoders" />
+        
+        <!-- Styles -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        <link href="assets/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet"/>
+        <link href="assets/plugins/uniform/css/uniform.default.min.css" rel="stylesheet"/>
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/line-icons/simple-line-icons.css" rel="stylesheet" type="text/css"/>	
+        <link href="assets/plugins/offcanvasmenueffects/css/menu_cornerbox.css" rel="stylesheet" type="text/css"/>	
+        <link href="assets/plugins/waves/waves.min.css" rel="stylesheet" type="text/css"/>	
+        <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/3d-bold-navigation/css/style.css" rel="stylesheet" type="text/css"/>	
+        <link href="assets/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/plugins/gridgallery/css/component.css" rel="stylesheet" type="text/css"/>
+        
+        <!-- Theme Styles -->
+        <link href="assets/css/modern.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/themes/green.css" class="theme-color" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+        
+        <script src="assets/plugins/3d-bold-navigation/js/modernizr.js"></script>
+        <script src="assets/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+        <script src="assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+        <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 
-    <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
-
-    <!-- Icons -->
-    <link href="css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/rdorval.css" rel="stylesheet" type="text/css">
-    
-    <script src="js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-    <script>
-    function GetQueryString(a)
+		<script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        <script>
+        function GetQueryString(a)
     {
         a = a || window.location.search.substr(1).split('&').concat(window.location.hash.substr(1).split("&"));
     
@@ -62,7 +79,7 @@
         this.retorno = '';
         
         var tamanho;
-        
+		        
         tamanho = qs['total'];
     
                         for (i = 1; i <= tamanho; i++)
@@ -73,107 +90,109 @@
                             this.retorno += '&capitulo=' + [i];
                             this.retorno += '&total=' + tamanho;
                             this.retorno += '&tipo=1';
-                            this.retorno += '"class="waves-effect waves-light btn primary-color" style="width:40px;margin:10px;height:35px;padding-left:16px;">';
+                            this.retorno += '"class="btn btn-success btn-block m-t-xs">';
                             this.retorno += [i];
                             this.retorno += '</a>';
                             
                         }
                 $('#resultado').html(this.retorno);
             });
-    </script>
-  <meta charset="utf-8">
-</head>
+        </script>
 
-  <body>
-    <div> <!-- Main Container -->
-
-      <!-- Sidebar -->
-      <ul id="slide-out" class="side-nav primary-color collapsible">
-		<li>
-          <div class="sidenav-header">
-            <!-- Avatar -->
-            <div class="nav-avatar">
-              <img class="circle avatar" src="img/iasd.png" alt="">
-              <div class="avatar-body">
-                <h3>ABASE</h3>
-                <p>União Leste Brasileira</p>
-              </div>
-            </div>
-          </div>
-        </li>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
         
-        <!-- Menu -->
-        <li><a href="index.html" class="no-child"><i class="ion-ios-home"></i> Inicio </a></li>
-        <li><a href="filtro_agenda.html" class="no-child"><i class="ion-android-calendar"></i> Agenda </a></li>
-        <li><a href="projetos.html" class="no-child"><i class="ion-android-bulb"></i> Projetos </a></li>
-        <li><a href="video.html" class="no-child"><i class="ion-android-phone-portrait"></i> Canal de Vídeos</a> </li>
-        <li><a href="biblia.html" class="no-child"><i class="ion-ios-bookmarks"></i> Biblia </a></li>
-        <li><a href="sobre.html" class="no-child"><i class="ion-android-settings"></i> Sobre </a></li>
-        <li><a href="acesso.html" class="no-child"><i class="ion-clipboard"></i> Acesso </a></li>
-        <li><a href="#" class="no-child"><i class="ion-android-close"></i> Fechar menu </a></li>
-      </ul>
-      <!-- End of Sidebars -->
+    </head>
+    <body class="page-header-fixed">
+        <main class="page-content content-wrap">
+                        <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="sidebar-pusher">
+                        <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="logo-box">
+                        <a href="index.html" class="logo-text"><span>APP DA AMA</span></a>
+                    </div><!-- Logo Box -->
+                    <div class="search-button">
+                        <a href="index.html"><i class="menu-icon glyphicon glyphicon-home"></i></a>
+                    </div>
+                    <div class="topmenu-outer">
+                        <div class="top-menu">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>		
+                                    <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
+                                </li>
+                                <li>	
+                                    <a href="index.html"><i class="menu-icon glyphicon glyphicon-home"></i></a>
+                                </li>
+                            </ul><!-- Nav -->
+                        </div><!-- Top Menu -->
+                    </div>
+                </div>
+            </div><!-- Navbar -->
+            <div class="page-sidebar sidebar">
+                <div class="page-sidebar-inner slimscroll">
+                    <ul class="menu accordion-menu">
+                      <li><a href="index.html" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-home"></span><p>Início</p></a></li>
+                      <li><a href="filtro_campo.html" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-calendar"></span><p>Agenda</p></a></li>
+                        <li><a href="videos.html" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-film"></span><p>Vídeos</p></a></li>
+                        <li><a href="biblia.html" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-book"></span><p>Bíblia</p></a></li>
 
-      <!-- Toolbar -->
-      <div id="toolbar" class="primary-color">
-        <div class="title">ABASE</div>
-        <div class="open-right" id="open-right" data-activates="slide-out">
-          <i class="ion-android-menu"></i>
-        </div>
-        <div class="open-right" id="open-right" data-activates="slide-out">
-         <a href="index.html" class="no-child"><i class="ion-ios-home"></i> </a>
-        </div>
-      </div>
-      <!-- End of Toolbar -->
-      
-      <!-- Page Contents -->
-      <div class="page animated fadeinright">
+                        <li><a href="sobre.html" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-info-sign"></span><p>Sobre</p></a></li>
+                    </ul>
+                </div><!-- Page Sidebar Inner -->
+            </div><!-- Page Sidebar -->
+            <div class="page-inner">
+            	<div class="page-title">
+                    <h3 id="titulo"></h3>
+                    <div class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li>Capítulos da Bíblia</li>
+                        </ol>
+                    </div>
+                </div>
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-white">
+                                <div class="panel-body">
+								 
+    							<div id="resultado" align="center"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+               <div class="page-footer">
+                    <p align="left">Associação Maranhense da Igreja Adventista do Sétimo Dia</p>
+                </div>
+            </div><!-- Page Inner -->
+        </main><!-- Page Content -->
+
+        <!-- Javascripts -->
+        <script src="assets/plugins/pace-master/pace.min.js"></script>
+        <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/switchery/switchery.min.js"></script>
+        <script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
+        <script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
+        <script src="assets/plugins/offcanvasmenueffects/js/main.js"></script>
+        <script src="assets/plugins/waves/waves.min.js"></script>
+        <script src="assets/plugins/3d-bold-navigation/js/main.js"></script>		
+        <script src="assets/plugins/gridgallery/js/imagesloaded.pkgd.min.js"></script>
+		<script src="assets/plugins/gridgallery/js/masonry.pkgd.min.js"></script>
+		<script src="assets/plugins/gridgallery/js/classie.js"></script>
+		<script src="assets/plugins/gridgallery/js/cbpgridgallery.js"></script>
+        <script src="assets/js/modern.min.js"></script>
+        <script src="assets/js/pages/gallery.js"></script>
         
-        <div class="divider"></div>
-
-        <div class="p-20 center">
-            <i class="ion-ios-bookmarks"></i>
-            <h4 class="m-0" id="titulo"></h4>
-            <p>Capítulos da Bíblia</p>
-        </div>
-
-        <center>
-            <a href="biblia.html" class="btn-large espaco"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
-        </center>
-
-        <div class="divider"></div>
-
-        <div class="container">
-            <div class="row">
-              <div class="col s12">
-    				<div id="resultado" align="center"></div>
-              </div>
-            </div>
-        </div>
-        
-       <div class="divider"></div>
-
-        <center>
-            <a href="biblia.html" class="btn-large espaco"><i class="ion-arrow-left-a icone"></i>Voltar</a>
-            <a href="index.html" class="btn-large espaco"><i class="ion-ios-home icone"></i>Início</a>
-        </center>
-        
-        <div class="divider"></div>
-
-        
-
-      </div> 
-      <!-- End of Page Contents -->
-
-    </div><!-- End of Main Container -->
-    
-    <script src="js/jquery.swipebox.min.js"></script>   
-    <script src="js/jquery.smoothState.min.js"></script> 
-    <script src="js/materialize.min.js"></script> 
-    <script src="js/swiper.min.js"></script>  
-    <script src="js/jquery.mixitup.min.js"></script>
-    <script src="js/masonry.min.js"></script>
-    <script src="js/functions.js"></script>
-  </body>
+    </body>
 </html>
